@@ -1,0 +1,25 @@
+# `CardVentureTrainer` by `redleaf`
+
+## Features
+
+This is a simple mod using **BepInEx 6** to modify the game **`CardVenture:JuasAHead`**, which includes following features:
+
+* Enable test version features, the debug menu.
+* Allow Diamond Shield to be unlocked and used.
+* Unlock chapter 3.
+
+## How to use
+
+1. `git clone https://github.com/redleaf1221/CardVentureTrainer.git `
+2. Build the project.
+3. By the way, you should remove the `PostBuildEvent` in `CardVentureTrainer.csproj`.
+4. Download latest [BepInEx 6 Bleeding Edge Build](https://builds.bepinex.dev/projects/bepinex_be) (BepInEx Unity (Mono) for Windows (x64) games)
+5. Unzip and place it in the game folder.
+6. Copy generated `CardVentureTrainer.dll` to `CardventureJustAHeadDemo\BepInEx\plugins`
+7. Enjoy~
+
+## Misc
+
+<img src="misc/I Patched 100 Methods.png">
+
+Conditional Compile? Interesting.
