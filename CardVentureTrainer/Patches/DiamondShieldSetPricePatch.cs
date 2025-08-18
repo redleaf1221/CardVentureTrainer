@@ -31,10 +31,7 @@ public static class DiamondShieldSetPricePatch {
 
         if (!found) {
             Plugin.Logger.LogError("Failed to patch UnLockUI.SetPrice!!");
-            return codes.AsEnumerable();
         }
-        
-        Plugin.Logger.LogMessage("DiamondShieldSetPricePatch succeed.");
         
         return codes.AsEnumerable();
     }
