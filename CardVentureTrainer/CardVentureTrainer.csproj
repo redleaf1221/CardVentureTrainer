@@ -13,14 +13,13 @@
             https://nuget.samboy.dev/v3/index.json
         </RestoreAdditionalProjectSources>
         <RootNamespace>CardVentureTrainer</RootNamespace>
-        <NoWarn>NU1604</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all"/>
         <PackageReference Include="BepInEx.Unity.Mono" Version="6.0.0-be.*" IncludeAssets="compile"/>
         <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*"/>
-        <PackageReference Include="UnityEngine.Modules" Version="2021.3.27f1c2" IncludeAssets="compile"/>
+        <PackageReference Include="UnityEngine.Modules" Version="2021.3.33" IncludeAssets="compile" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
@@ -30,10 +29,6 @@
     <ItemGroup>
       <Reference Include="Assembly-CSharp">
         <HintPath>..\libs\Assembly-CSharp-publicized.dll</HintPath>
-        <Private>False</Private>
-      </Reference>
-      <Reference Include="UnityEngine.CoreModule">
-        <HintPath>..\libs\UnityEngine.CoreModule.dll</HintPath>
         <Private>False</Private>
       </Reference>
     </ItemGroup>
