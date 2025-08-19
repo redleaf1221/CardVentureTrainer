@@ -2,6 +2,7 @@
 using BepInEx;
 using BepInEx.Logging;
 using BepInEx.Unity.Mono;
+using CardVentureTrainer.Patches;
 using HarmonyLib;
 
 namespace CardVentureTrainer;

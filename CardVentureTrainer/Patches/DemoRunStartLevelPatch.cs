@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection.Emit;
 using HarmonyLib;
 
-namespace CardVentureTrainer;
+namespace CardVentureTrainer.Patches;
 
 [HarmonyPatch(typeof(BattleObject), nameof(BattleObject.runStartLevel))]
 public class DemoRunStartLevelPatch {

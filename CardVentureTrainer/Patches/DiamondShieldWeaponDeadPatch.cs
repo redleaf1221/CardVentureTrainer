@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection.Emit;
 using HarmonyLib;
 
-namespace CardVentureTrainer;
+namespace CardVentureTrainer.Patches;
 
 [HarmonyPatch(typeof(UnitObjectOther), nameof(UnitObjectOther.WeaponDead))]
 public static class DiamondShieldWeaponDeadPatch {

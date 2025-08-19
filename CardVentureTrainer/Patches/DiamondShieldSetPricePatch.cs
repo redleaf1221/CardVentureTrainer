@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using HarmonyLib;
 using System.Reflection.Emit;
+using HarmonyLib;
 
-namespace CardVentureTrainer;
+namespace CardVentureTrainer.Patches;
 
 [HarmonyPatch(typeof(UnLockUI), nameof(UnLockUI.SetPrice))]
 public static class DiamondShieldSetPricePatch {

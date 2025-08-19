@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 
-namespace CardVentureTrainer;
+namespace CardVentureTrainer.Patches;
 
 [HarmonyPatch(typeof(GameController), nameof(GameController.Awake))]
 public static class EnableTestVersionPatch {
