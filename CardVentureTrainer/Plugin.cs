@@ -28,6 +28,8 @@ public class Plugin : BaseUnityPlugin {
         Logger.LogMessage("DemoRunChapterCompletePatch done.");
         harmony.PatchAll(typeof(DemoRunStartLevelPatch));
         Logger.LogMessage("DemoRunStartLevelPatch done.");
+        harmony.PatchAll(typeof(DemoRoomGetRandomRoomPatch));
+        Logger.LogMessage("DemoRoomGetRandomRoomPatch done.");
         
         Logger.LogMessage($"Plugin {MyPluginInfo.PLUGIN_GUID} loaded!");
     }

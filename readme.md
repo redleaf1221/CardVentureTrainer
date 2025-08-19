@@ -7,6 +7,7 @@ This is a simple mod using **BepInEx 6** to modify the game **`CardVenture:JuasA
 * Enable test version features, the debug menu.
 * Allow Diamond Shield to be unlocked and used.
 * Unlock chapter 3.
+* Allow room Apple and Soul to be seen.
 
 ## How to use
 
