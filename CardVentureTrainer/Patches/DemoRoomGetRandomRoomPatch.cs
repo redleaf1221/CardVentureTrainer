@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 using HarmonyLib;
+using UnityEngine;
 
 namespace CardVentureTrainer.Patches;
 
@@ -8,30 +8,33 @@ namespace CardVentureTrainer.Patches;
 public class DemoRoomGetRandomRoomPatch {
     // ReSharper disable once InconsistentNaming
     // ReSharper disable once RedundantAssignment
-    static bool Prefix(ref RoomType __result, List<RoomType> weightedPool) {
+    private static bool Prefix(ref RoomType __result, List<RoomType> weightedPool) {
         RoomType roomType = weightedPool[Random.Range(0, weightedPool.Count)];
         if (roomType != RoomType.Life) {
             __result = roomType;
             return false;
         }
-        float r = Random.value;
-        if (r >= 0.9f) {
+        var randomValue = Random.value;
+        if (randomValue >= 0.9f) {
             __result = RoomType.Life;
+            return false;
         }
-        float remappedValue = r / 0.9f;
+        var remappedValue = randomValue / 0.9f;
         if (remappedValue < 0.2f) {
             __result = RoomType.Coin;
         }
-        if (remappedValue < 0.4f) {
+        else if (remappedValue < 0.4f) {
             __result = RoomType.Puzzle;
         }
-        if (remappedValue < 0.6f) {
+        else if (remappedValue < 0.6f) {
             __result = RoomType.Cat;
         }
-        if (remappedValue < 0.8f) {
+        else if (remappedValue < 0.8f) {
             __result = RoomType.Soul;
         }
-        __result = RoomType.Apple;
+        else {
+            __result = RoomType.Apple;
+        }
         return false;
     }
 }
