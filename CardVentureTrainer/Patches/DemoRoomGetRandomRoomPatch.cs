@@ -14,23 +14,14 @@ public class DemoRoomGetRandomRoomPatch {
             __result = roomType;
             return false;
         }
-        var randomValue = Random.value;
-        if (randomValue >= 0.8f) {
-            __result = RoomType.Life;
-            return false;
-        }
-        var remappedValue = randomValue / 0.8f;
-        if (remappedValue < 0.2f) {
-            __result = RoomType.Coin;
-        } else if (remappedValue < 0.4f) {
-            __result = RoomType.Puzzle;
-        } else if (remappedValue < 0.6f) {
-            __result = RoomType.Cat;
-        } else if (remappedValue < 0.8f) {
-            __result = RoomType.Soul;
-        } else {
-            __result = RoomType.Apple;
-        }
+        __result = Random.value switch {
+            < 0.17f => RoomType.Life,
+            < 0.33f => RoomType.Coin,
+            < 0.5f => RoomType.Puzzle,
+            < 0.66f => RoomType.Cat,
+            < 0.83f => RoomType.Soul,
+            _ => RoomType.Apple
+        };
         return false;
     }
 }
