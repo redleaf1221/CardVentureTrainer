@@ -9,6 +9,7 @@ This is a simple mod using **BepInEx 6** to modify the game **`CardVenture:JuasA
 * Unlock chapter 3.
 * Allow room Apple and Soul to be seen.
 * Increase the probability of easter eggs in room Life.
+* Seal some of the ability pools.
 
 ## How to use
 
