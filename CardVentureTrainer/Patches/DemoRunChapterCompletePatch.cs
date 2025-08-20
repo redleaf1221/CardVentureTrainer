@@ -19,9 +19,8 @@ public class DemoRunChapterCompletePatch {
                 codes[i + 2].operand?.ToString()?.Contains("op_Implicit") == true &&
                 codes[i + 3].opcode == OpCodes.Ldc_I4_2 &&
                 codes[i + 4].opcode == OpCodes.Blt) {
-                
                 codes[i + 3].opcode = OpCodes.Ldc_I4_3;
-                
+
                 found = true;
                 break;
             }
@@ -30,7 +29,7 @@ public class DemoRunChapterCompletePatch {
         if (!found) {
             Plugin.Logger.LogError("Failed to patch BattleObject.runChapterComplete!!");
         }
-        
+
         return codes.AsEnumerable();
     }
 }

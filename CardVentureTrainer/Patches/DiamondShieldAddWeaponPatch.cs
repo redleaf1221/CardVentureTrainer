@@ -16,13 +16,12 @@ public class DiamondShieldAddWeaponPatch {
                 codes[i + 1].opcode == OpCodes.Ldc_I4 &&
                 (int)codes[i + 1].operand == 1306 &&
                 codes[i + 2].opcode == OpCodes.Bne_Un) {
-                
                 codes[i].opcode = OpCodes.Nop;
                 codes[i].operand = null;
                 codes[i + 1].opcode = OpCodes.Nop;
                 codes[i + 1].operand = null;
                 codes[i + 2].opcode = OpCodes.Br;
-                
+
                 found = true;
                 break;
             }
@@ -31,7 +30,7 @@ public class DiamondShieldAddWeaponPatch {
         if (!found) {
             Plugin.Logger.LogError("Failed to patch BattleObject.AddWeapon!!");
         }
-        
+
         return codes.AsEnumerable();
     }
 }

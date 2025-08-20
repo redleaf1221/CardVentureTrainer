@@ -28,7 +28,7 @@ public class Plugin : BaseUnityPlugin {
             false, "After finishing demo take you to partly finished chapter 3.");
         _configUnusedRooms = Config.Bind("Demo", "EnableUnusedRooms",
             true, "Enable unused rooms Apple and Soul.");
-        
+
         var harmony = new Harmony(MyPluginInfo.PLUGIN_GUID);
         if (_configTestVersion.Value) {
             harmony.PatchAll(typeof(EnableTestVersionPatch));
@@ -52,7 +52,7 @@ public class Plugin : BaseUnityPlugin {
             harmony.PatchAll(typeof(DemoRoomGetRandomRoomPatch));
             Logger.LogMessage("DemoRoomGetRandomRoomPatch done.");
         }
-        
+
         Logger.LogMessage($"Plugin {MyPluginInfo.PLUGIN_GUID} loaded!");
     }
 }

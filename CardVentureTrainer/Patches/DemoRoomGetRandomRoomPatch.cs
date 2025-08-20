@@ -22,17 +22,13 @@ public class DemoRoomGetRandomRoomPatch {
         var remappedValue = randomValue / 0.9f;
         if (remappedValue < 0.2f) {
             __result = RoomType.Coin;
-        }
-        else if (remappedValue < 0.4f) {
+        } else if (remappedValue < 0.4f) {
             __result = RoomType.Puzzle;
-        }
-        else if (remappedValue < 0.6f) {
+        } else if (remappedValue < 0.6f) {
             __result = RoomType.Cat;
-        }
-        else if (remappedValue < 0.8f) {
+        } else if (remappedValue < 0.8f) {
             __result = RoomType.Soul;
-        }
-        else {
+        } else {
             __result = RoomType.Apple;
         }
         return false;
