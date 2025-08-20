@@ -11,7 +11,7 @@ public class DemoRunChapterCompletePatch {
         List<CodeInstruction> codes = new(instructions);
         bool found = false;
 
-        for (int i = 0; i < codes.Count - 3; i++) {
+        for (int i = 0; i < codes.Count - 4; i++) {
             if (codes[i].opcode == OpCodes.Ldarg_0 &&
                 codes[i + 1].opcode == OpCodes.Ldfld &&
                 codes[i + 1].operand?.ToString()?.Contains("currentChapter") == true &&

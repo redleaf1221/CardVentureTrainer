@@ -7,11 +7,11 @@ namespace CardVentureTrainer.Patches;
 
 [HarmonyPatch(typeof(BattleObject), nameof(BattleObject.AddWeapon))]
 public class DiamondShieldAddWeaponPatch {
-    static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) {
+    private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) {
         List<CodeInstruction> codes = new(instructions);
-        bool found = false;
+        var found = false;
 
-        for (int i = 0; i < codes.Count - 3; i++) {
+        for (var i = 0; i < codes.Count - 2; i++) {
             if (codes[i].opcode == OpCodes.Ldarg_1 &&
                 codes[i + 1].opcode == OpCodes.Ldc_I4 &&
                 (int)codes[i + 1].operand == 1306 &&
