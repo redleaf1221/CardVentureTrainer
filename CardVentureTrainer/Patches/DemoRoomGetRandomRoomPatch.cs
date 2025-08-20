@@ -15,11 +15,11 @@ public class DemoRoomGetRandomRoomPatch {
             return false;
         }
         var randomValue = Random.value;
-        if (randomValue >= 0.9f) {
+        if (randomValue >= 0.8f) {
             __result = RoomType.Life;
             return false;
         }
-        var remappedValue = randomValue / 0.9f;
+        var remappedValue = randomValue / 0.8f;
         if (remappedValue < 0.2f) {
             __result = RoomType.Coin;
         } else if (remappedValue < 0.4f) {
