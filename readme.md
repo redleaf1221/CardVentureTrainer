@@ -2,7 +2,7 @@
 
 ## Features
 
-This is a simple mod using **BepInEx 6** to modify the game **`CardVenture:JuasAHead`**, which includes following features:
+This is a simple mod using **BepInEx 6** to modify the game **`CardVenture:JuasAHead`** (demo), which includes following features:
 
 * Enable test version features, the debug menu.
 * Allow Diamond Shield to be unlocked and used.
