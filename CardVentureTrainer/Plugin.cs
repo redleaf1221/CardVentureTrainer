@@ -12,9 +12,10 @@ namespace CardVentureTrainer;
 [SuppressMessage("Class Declaration", "BepInEx002:Classes with BepInPlugin attribute must inherit from BaseUnityPlugin")]
 public class Plugin : BaseUnityPlugin {
     public new static ManualLogSource Logger;
-    private ConfigEntry<bool> _configTestVersion;
-    private ConfigEntry<bool> _configDiamondShield;
     private ConfigEntry<bool> _configChapter3;
+    private ConfigEntry<bool> _configDiamondShield;
+    private ConfigEntry<bool> _configEasterEggLife;
+    private ConfigEntry<bool> _configTestVersion;
     private ConfigEntry<bool> _configUnusedRooms;
 
     private void Awake() {
@@ -28,6 +29,8 @@ public class Plugin : BaseUnityPlugin {
             false, "After finishing demo take you to partly finished chapter 3.");
         _configUnusedRooms = Config.Bind("Demo", "EnableUnusedRooms",
             true, "Enable unused rooms Apple and Soul.");
+        _configEasterEggLife = Config.Bind("Probability", "EasterEggLife",
+            true, "Make probability of encounter easter egg in room Life bigger.");
 
         var harmony = new Harmony(MyPluginInfo.PLUGIN_GUID);
         if (_configTestVersion.Value) {
@@ -51,6 +54,10 @@ public class Plugin : BaseUnityPlugin {
         if (_configUnusedRooms.Value) {
             harmony.PatchAll(typeof(DemoRoomGetRandomRoomPatch));
             Logger.LogMessage("DemoRoomGetRandomRoomPatch done.");
+        }
+        if (_configEasterEggLife.Value) {
+            harmony.PatchAll(typeof(EasterEggLifePatch));
+            Logger.LogMessage("EasterEggLifePatch done.");
         }
 
         Logger.LogMessage($"Plugin {MyPluginInfo.PLUGIN_GUID} loaded!");
