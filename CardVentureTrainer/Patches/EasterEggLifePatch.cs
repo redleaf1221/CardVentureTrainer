@@ -7,7 +7,7 @@ using UnityEngine;
 namespace CardVentureTrainer.Patches;
 
 [HarmonyPatch(typeof(RoomAbility), nameof(RoomAbility.InLifeAbilityRoom))]
-public class EasterEggLifePatch {
+public static class EasterEggLifePatch {
     private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) {
         List<CodeInstruction> codes = new(instructions);
         var found = 0;

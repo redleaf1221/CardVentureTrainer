@@ -46,6 +46,10 @@ public class Plugin : BaseUnityPlugin {
             harmony.PatchAll(typeof(EasterEggLifePatch));
             Logger.LogMessage("EasterEggLifePatch done.");
         }
+        if (Conf.ConfigUseSealData.Value) {
+            harmony.PatchAll(typeof(SealDataInitAbilityPollPatch));
+            Logger.LogMessage("SealDataInitAbilityPollPatch done.");
+        }
 
         Logger.LogMessage($"Plugin {MyPluginInfo.PLUGIN_GUID} loaded!");
     }

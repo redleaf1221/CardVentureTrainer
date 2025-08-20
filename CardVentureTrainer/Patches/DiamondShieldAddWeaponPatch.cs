@@ -6,7 +6,7 @@ using HarmonyLib;
 namespace CardVentureTrainer.Patches;
 
 [HarmonyPatch(typeof(BattleObject), nameof(BattleObject.AddWeapon))]
-public class DiamondShieldAddWeaponPatch {
+public static class DiamondShieldAddWeaponPatch {
     private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) {
         List<CodeInstruction> codes = new(instructions);
         var found = false;

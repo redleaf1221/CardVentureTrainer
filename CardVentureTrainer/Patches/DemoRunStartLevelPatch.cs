@@ -6,7 +6,7 @@ using HarmonyLib;
 namespace CardVentureTrainer.Patches;
 
 [HarmonyPatch(typeof(BattleObject), nameof(BattleObject.runStartLevel))]
-public class DemoRunStartLevelPatch {
+public static class DemoRunStartLevelPatch {
     static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) {
         List<CodeInstruction> codes = new(instructions);
         bool found = false;

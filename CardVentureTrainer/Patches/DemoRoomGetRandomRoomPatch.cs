@@ -5,7 +5,7 @@ using UnityEngine;
 namespace CardVentureTrainer.Patches;
 
 [HarmonyPatch(typeof(BattleObject), nameof(BattleObject.GetRandomRoom))]
-public class DemoRoomGetRandomRoomPatch {
+public static class DemoRoomGetRandomRoomPatch {
     // ReSharper disable once InconsistentNaming
     // ReSharper disable once RedundantAssignment
     private static bool Prefix(ref RoomType __result, List<RoomType> weightedPool) {
