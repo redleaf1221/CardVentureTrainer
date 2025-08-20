@@ -19,7 +19,7 @@
         <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all"/>
         <PackageReference Include="BepInEx.Unity.Mono" Version="6.0.0-be.*" IncludeAssets="compile"/>
         <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*"/>
-        <PackageReference Include="UnityEngine.Modules" Version="2021.3.33" IncludeAssets="compile" />
+        <PackageReference Include="UnityEngine.Modules" Version="2021.3.33" IncludeAssets="compile"/>
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
@@ -27,13 +27,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Reference Include="Assembly-CSharp">
-        <HintPath>..\libs\Assembly-CSharp-publicized.dll</HintPath>
-        <Private>False</Private>
-      </Reference>
+        <Reference Include="Assembly-CSharp">
+            <HintPath>..\libs\Assembly-CSharp-publicized.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
     </ItemGroup>
-
-    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-        <Exec Command="xcopy /Y /R &quot;$(TargetDir)*.*&quot; &quot;C:\SteamLibrary\steamapps\common\CardventureJustAHeadDemo\BepInEx\plugins\CardVentureTrainer&quot;" />
-    </Target>
 </Project>
