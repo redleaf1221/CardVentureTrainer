@@ -7,7 +7,7 @@ using UnityEngine;
 namespace CardVentureTrainer.Patches;
 
 [HarmonyPatch(typeof(UnitObjectPlayer), nameof(UnitObjectPlayer.PlayerInputCheck))]
-public class HadoukenRandomDamagePatch {
+public static class HadoukenRandomDamagePatch {
     private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) {
         List<CodeInstruction> codes = new(instructions);
         var found = false;

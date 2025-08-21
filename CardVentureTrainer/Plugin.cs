@@ -54,6 +54,12 @@ public class Plugin : BaseUnityPlugin {
             harmony.PatchAll(typeof(HadoukenRandomDamagePatch));
             Logger.LogMessage("HadoukenRandomDamagePatch done.");
         }
+        if (Conf.DisableSafeInt) {
+            harmony.PatchAll(typeof(SafeIntGenerateKeyPatch));
+            Logger.LogMessage("SafeIntGenerateKeyPatch done.");
+            harmony.PatchAll(typeof(SafeIntValueSetterPatch));
+            Logger.LogMessage("SafeIntValueGetPatch done.");
+        }
 
         Logger.LogMessage($"Plugin {MyPluginInfo.PLUGIN_GUID} loaded!");
     }
