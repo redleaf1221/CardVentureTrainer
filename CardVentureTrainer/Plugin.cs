@@ -13,62 +13,70 @@ public class Plugin : BaseUnityPlugin {
     public new static ManualLogSource Logger;
     public static PluginConfig Conf;
 
+    // ReSharper disable once MemberCanBePrivate.Global
+    public static Harmony HarmonyInstance;
+
 
     private void Awake() {
         Logger = base.Logger;
 
         Conf = new PluginConfig(this);
 
-        var harmony = new Harmony(MyPluginInfo.PLUGIN_GUID);
+        HarmonyInstance = new Harmony(MyPluginInfo.PLUGIN_GUID);
+
+        DoAllPatches();
+
+        Logger.LogMessage($"Plugin {MyPluginInfo.PLUGIN_GUID} loaded!");
+    }
+
+    private static void DoAllPatches() {
         if (Conf.EnableTestVersion) {
-            harmony.PatchAll(typeof(EnableTestVersionPatch));
+            HarmonyInstance.PatchAll(typeof(EnableTestVersionPatch));
             Logger.LogMessage("TestVersionPatch done.");
         }
         if (Conf.EnableDiamondShield) {
-            harmony.PatchAll(typeof(DiamondShieldSetPricePatch));
+            HarmonyInstance.PatchAll(typeof(DiamondShieldSetPricePatch));
             Logger.LogMessage("DiamondShieldSetPricePatch done.");
-            harmony.PatchAll(typeof(DiamondShieldWeaponDeadPatch));
+            HarmonyInstance.PatchAll(typeof(DiamondShieldWeaponDeadPatch));
             Logger.LogMessage("DiamondShieldWeaponDeadPatch done.");
-            harmony.PatchAll(typeof(DiamondShieldAddWeaponPatch));
+            HarmonyInstance.PatchAll(typeof(DiamondShieldAddWeaponPatch));
             Logger.LogMessage("DiamondShieldAddWeaponPatch done.");
         }
         if (Conf.EnableChapter3) {
-            harmony.PatchAll(typeof(DemoRunChapterCompletePatch));
+            HarmonyInstance.PatchAll(typeof(DemoRunChapterCompletePatch));
             Logger.LogMessage("DemoRunChapterCompletePatch done.");
-            harmony.PatchAll(typeof(DemoRunStartLevelPatch));
+            HarmonyInstance.PatchAll(typeof(DemoRunStartLevelPatch));
             Logger.LogMessage("DemoRunStartLevelPatch done.");
         }
         if (Conf.EnableUnusedRooms) {
-            harmony.PatchAll(typeof(DemoRoomGetRandomRoomPatch));
+            HarmonyInstance.PatchAll(typeof(DemoRoomGetRandomRoomPatch));
             Logger.LogMessage("DemoRoomGetRandomRoomPatch done.");
         }
         if (Conf.EnableEasterEggLife) {
-            harmony.PatchAll(typeof(EasterEggLifePatch));
+            HarmonyInstance.PatchAll(typeof(EasterEggLifePatch));
             Logger.LogMessage("EasterEggLifePatch done.");
         }
         if (Conf.EnableSealDataOverride) {
-            harmony.PatchAll(typeof(SealDataInitAbilityPollPatch));
+            HarmonyInstance.PatchAll(typeof(SealDataInitAbilityPollPatch));
             Logger.LogMessage("SealDataInitAbilityPollPatch done.");
         }
         if (Conf.DisableHadoukenNegDamage) {
-            harmony.PatchAll(typeof(HadoukenRandomDamagePatch));
+            HarmonyInstance.PatchAll(typeof(HadoukenRandomDamagePatch));
             Logger.LogMessage("HadoukenRandomDamagePatch done.");
         }
         if (Conf.DisableSafeInt) {
-            harmony.PatchAll(typeof(SafeIntGenerateKeyPatch));
+            HarmonyInstance.PatchAll(typeof(SafeIntGenerateKeyPatch));
             Logger.LogMessage("SafeIntGenerateKeyPatch done.");
-            harmony.PatchAll(typeof(SafeIntValueSetterPatch));
+            HarmonyInstance.PatchAll(typeof(SafeIntValueSetterPatch));
             Logger.LogMessage("SafeIntValueGetPatch done.");
         }
         if (Conf.AlwaysParrySide) {
-            harmony.PatchAll(typeof(ParrySidePatch));
+            HarmonyInstance.PatchAll(typeof(ParrySidePatch));
             Logger.LogMessage("ParrySidePatch done.");
         }
         if (Conf.DisableParryOldPosCheck) {
-            harmony.PatchAll(typeof(ParryCheckOldPosPatch));
+            HarmonyInstance.PatchAll(typeof(ParryCheckOldPosPatch));
             Logger.LogMessage("ParryCheckOldPosPatch done.");
         }
-
-        Logger.LogMessage($"Plugin {MyPluginInfo.PLUGIN_GUID} loaded!");
     }
 }
