@@ -18,13 +18,13 @@ public class Plugin : BaseUnityPlugin {
         Logger = base.Logger;
 
         Conf = new PluginConfig(this);
-        
+
         var harmony = new Harmony(MyPluginInfo.PLUGIN_GUID);
-        if (Conf.ConfigTestVersion.Value) {
+        if (Conf.EnableTestVersion) {
             harmony.PatchAll(typeof(EnableTestVersionPatch));
             Logger.LogMessage("TestVersionPatch done.");
         }
-        if (Conf.ConfigDiamondShield.Value) {
+        if (Conf.EnableDiamondShield) {
             harmony.PatchAll(typeof(DiamondShieldSetPricePatch));
             Logger.LogMessage("DiamondShieldSetPricePatch done.");
             harmony.PatchAll(typeof(DiamondShieldWeaponDeadPatch));
@@ -32,23 +32,27 @@ public class Plugin : BaseUnityPlugin {
             harmony.PatchAll(typeof(DiamondShieldAddWeaponPatch));
             Logger.LogMessage("DiamondShieldAddWeaponPatch done.");
         }
-        if (Conf.ConfigChapter3.Value) {
+        if (Conf.EnableChapter3) {
             harmony.PatchAll(typeof(DemoRunChapterCompletePatch));
             Logger.LogMessage("DemoRunChapterCompletePatch done.");
             harmony.PatchAll(typeof(DemoRunStartLevelPatch));
             Logger.LogMessage("DemoRunStartLevelPatch done.");
         }
-        if (Conf.ConfigUnusedRooms.Value) {
+        if (Conf.EnableUnusedRooms) {
             harmony.PatchAll(typeof(DemoRoomGetRandomRoomPatch));
             Logger.LogMessage("DemoRoomGetRandomRoomPatch done.");
         }
-        if (Conf.ConfigEasterEggLife.Value) {
+        if (Conf.EnableEasterEggLife) {
             harmony.PatchAll(typeof(EasterEggLifePatch));
             Logger.LogMessage("EasterEggLifePatch done.");
         }
-        if (Conf.ConfigUseSealData.Value) {
+        if (Conf.EnableSealDataOverride) {
             harmony.PatchAll(typeof(SealDataInitAbilityPollPatch));
             Logger.LogMessage("SealDataInitAbilityPollPatch done.");
+        }
+        if (Conf.DisableHadoukenNegDamage) {
+            harmony.PatchAll(typeof(HadoukenRandomDamagePatch));
+            Logger.LogMessage("HadoukenRandomDamagePatch done.");
         }
 
         Logger.LogMessage($"Plugin {MyPluginInfo.PLUGIN_GUID} loaded!");
