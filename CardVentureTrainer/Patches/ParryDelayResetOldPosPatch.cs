@@ -15,7 +15,7 @@ public static class ParryDelayResetOldPosPatch {
         for (var i = 0; i < codes.Count; i++) {
             if (codes[i].opcode == OpCodes.Ldc_R4 &&
                 Mathf.Approximately((float)codes[i].operand, 0.1f)) {
-                codes[i].operand = 0.5f;
+                codes[i].operand = 0.3f;
 
                 found = true;
                 break;
