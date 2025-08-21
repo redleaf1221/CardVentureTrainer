@@ -12,6 +12,8 @@ This is a simple mod using **BepInEx 6** to modify the game **CardVenture:JustAH
 * Seal some of the ability pools.
 * Disable negative damage of ability Hadouken.
 * Disable SafeInt so Cheat Engine works again.
+* Always allow parrying from sides.
+* Allow parrying even if perviously in the attack range.
 
 ## How to use
 

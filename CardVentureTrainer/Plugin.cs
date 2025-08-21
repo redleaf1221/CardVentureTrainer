@@ -60,6 +60,14 @@ public class Plugin : BaseUnityPlugin {
             harmony.PatchAll(typeof(SafeIntValueSetterPatch));
             Logger.LogMessage("SafeIntValueGetPatch done.");
         }
+        if (Conf.AlwaysParrySide) {
+            harmony.PatchAll(typeof(ParrySidePatch));
+            Logger.LogMessage("ParrySidePatch done.");
+        }
+        if (Conf.DisableParryOldPosCheck) {
+            harmony.PatchAll(typeof(ParryCheckOldPosPatch));
+            Logger.LogMessage("ParryCheckOldPosPatch done.");
+        }
 
         Logger.LogMessage($"Plugin {MyPluginInfo.PLUGIN_GUID} loaded!");
     }

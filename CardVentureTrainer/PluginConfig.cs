@@ -6,8 +6,14 @@ namespace CardVentureTrainer;
 
 public class PluginConfig(Plugin plugin) {
 
+    private readonly ConfigEntry<bool> _configAlwaysParrySide = plugin.Config.Bind("Trainer", "AlwaysParrySide",
+        false, "Always allow parrying from sides.");
+
     private readonly ConfigEntry<bool> _configDisableHadoukenNegDamage = plugin.Config.Bind("RNG", "DisableHadoukenNegativeDamage",
         false, "Disable negative damage of ability Hadouken.");
+
+    private readonly ConfigEntry<bool> _configDisableParryOldPosCheck = plugin.Config.Bind("Trainer", "DisableParryOldPosCheck",
+        false, "Allow parrying even if perviously in the attack range.");
 
     private readonly ConfigEntry<bool> _configDisableSafeInt = plugin.Config.Bind("General", "DisableSafeInt",
         true, "Disable SafeInt so Cheat Engine works again.");
@@ -41,5 +47,7 @@ public class PluginConfig(Plugin plugin) {
     public bool EnableUnusedRooms => _configEnableUnusedRooms.Value;
     public bool DisableHadoukenNegDamage => _configDisableHadoukenNegDamage.Value;
     public bool DisableSafeInt => _configDisableSafeInt.Value;
+    public bool AlwaysParrySide => _configAlwaysParrySide.Value;
+    public bool DisableParryOldPosCheck => _configDisableParryOldPosCheck.Value;
     public List<int> SealDataList => _configSealDataList.Value.Split('/').Select(int.Parse).ToList();
 }
