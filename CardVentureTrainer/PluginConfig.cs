@@ -9,20 +9,17 @@ public class PluginConfig(Plugin plugin) {
     private readonly ConfigEntry<bool> _configAlwaysParrySide = plugin.Config.Bind("Trainer", "AlwaysParrySide",
         false, "Always allow parrying from sides.");
 
+    private readonly ConfigEntry<bool> _configDelayResetOldPos = plugin.Config.Bind("Trainer", "DelayResetOldPos",
+        false, "Delay resetting oldPos which should make parrying easier.");
+
     private readonly ConfigEntry<bool> _configDisableHadoukenNegDamage = plugin.Config.Bind("RNG", "DisableHadoukenNegativeDamage",
         false, "Disable negative damage of ability Hadouken.");
 
     private readonly ConfigEntry<bool> _configDisableParryOldPosCheck = plugin.Config.Bind("Trainer", "DisableParryOldPosCheck",
         false, "Allow parrying even if perviously in the attack range.");
 
-    private readonly ConfigEntry<bool> _configDisableSafeInt = plugin.Config.Bind("General", "DisableSafeInt",
-        true, "Disable SafeInt so Cheat Engine works again.");
-
     private readonly ConfigEntry<bool> _configEnableChapter3 = plugin.Config.Bind("Demo", "EnableChapter3",
         false, "After finishing demo take you to partly finished chapter 3.");
-
-    private readonly ConfigEntry<bool> _configEnableDiamondShield = plugin.Config.Bind("Demo", "EnableDiamondShield",
-        true, "Allow acquiring diamond shield.");
 
     private readonly ConfigEntry<bool> _configEnableEasterEggLife = plugin.Config.Bind("RNG", "EasterEggLife",
         true, "Make probability of encounter easter egg in room Life bigger.");
@@ -40,14 +37,13 @@ public class PluginConfig(Plugin plugin) {
         "1200/1201/1202/1299", "Ability pools to choose from.\n(1200:Bomb, 1201:Bat, 1202:Lighting, 1203:Spawn, 1299:Events)");
 
     public bool EnableChapter3 => _configEnableChapter3.Value;
-    public bool EnableDiamondShield => _configEnableDiamondShield.Value;
     public bool EnableEasterEggLife => _configEnableEasterEggLife.Value;
     public bool EnableSealDataOverride => _configEnableSealDataOverride.Value;
     public bool EnableTestVersion => _configEnableTestVersion.Value;
     public bool EnableUnusedRooms => _configEnableUnusedRooms.Value;
     public bool DisableHadoukenNegDamage => _configDisableHadoukenNegDamage.Value;
-    public bool DisableSafeInt => _configDisableSafeInt.Value;
     public bool AlwaysParrySide => _configAlwaysParrySide.Value;
     public bool DisableParryOldPosCheck => _configDisableParryOldPosCheck.Value;
+    public bool DelayResetOldPos => _configDelayResetOldPos.Value;
     public List<int> SealDataList => _configSealDataList.Value.Split('/').Select(int.Parse).ToList();
 }

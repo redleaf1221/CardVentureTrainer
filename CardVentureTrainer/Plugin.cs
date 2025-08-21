@@ -34,14 +34,12 @@ public class Plugin : BaseUnityPlugin {
             HarmonyInstance.PatchAll(typeof(EnableTestVersionPatch));
             Logger.LogMessage("TestVersionPatch done.");
         }
-        if (Conf.EnableDiamondShield) {
-            HarmonyInstance.PatchAll(typeof(DiamondShieldSetPricePatch));
-            Logger.LogMessage("DiamondShieldSetPricePatch done.");
-            HarmonyInstance.PatchAll(typeof(DiamondShieldWeaponDeadPatch));
-            Logger.LogMessage("DiamondShieldWeaponDeadPatch done.");
-            HarmonyInstance.PatchAll(typeof(DiamondShieldAddWeaponPatch));
-            Logger.LogMessage("DiamondShieldAddWeaponPatch done.");
-        }
+        HarmonyInstance.PatchAll(typeof(DiamondShieldSetPricePatch));
+        Logger.LogMessage("DiamondShieldSetPricePatch done.");
+        HarmonyInstance.PatchAll(typeof(DiamondShieldWeaponDeadPatch));
+        Logger.LogMessage("DiamondShieldWeaponDeadPatch done.");
+        HarmonyInstance.PatchAll(typeof(DiamondShieldAddWeaponPatch));
+        Logger.LogMessage("DiamondShieldAddWeaponPatch done.");
         if (Conf.EnableChapter3) {
             HarmonyInstance.PatchAll(typeof(DemoRunChapterCompletePatch));
             Logger.LogMessage("DemoRunChapterCompletePatch done.");
@@ -64,12 +62,10 @@ public class Plugin : BaseUnityPlugin {
             HarmonyInstance.PatchAll(typeof(HadoukenRandomDamagePatch));
             Logger.LogMessage("HadoukenRandomDamagePatch done.");
         }
-        if (Conf.DisableSafeInt) {
-            HarmonyInstance.PatchAll(typeof(SafeIntGenerateKeyPatch));
-            Logger.LogMessage("SafeIntGenerateKeyPatch done.");
-            HarmonyInstance.PatchAll(typeof(SafeIntValueSetterPatch));
-            Logger.LogMessage("SafeIntValueGetPatch done.");
-        }
+        HarmonyInstance.PatchAll(typeof(SafeIntGenerateKeyPatch));
+        Logger.LogMessage("SafeIntGenerateKeyPatch done.");
+        HarmonyInstance.PatchAll(typeof(SafeIntValueSetterPatch));
+        Logger.LogMessage("SafeIntValueGetPatch done.");
         if (Conf.AlwaysParrySide) {
             HarmonyInstance.PatchAll(typeof(ParrySidePatch));
             Logger.LogMessage("ParrySidePatch done.");
@@ -77,6 +73,12 @@ public class Plugin : BaseUnityPlugin {
         if (Conf.DisableParryOldPosCheck) {
             HarmonyInstance.PatchAll(typeof(ParryCheckOldPosPatch));
             Logger.LogMessage("ParryCheckOldPosPatch done.");
+        }
+        HarmonyInstance.PatchAll(typeof(ParryDebugPatch));
+        Logger.LogMessage("ParryDebugPatch done.");
+        if (Conf.DelayResetOldPos) {
+            HarmonyInstance.PatchAll(typeof(ParryDelayResetOldPosPatch));
+            Logger.LogMessage("ParryDelayResetOldPosPatch done.");
         }
     }
 }

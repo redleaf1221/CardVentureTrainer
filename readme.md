@@ -14,6 +14,7 @@ This is a simple mod using **BepInEx 6** to modify the game **CardVenture:JustAH
 * Disable SafeInt so Cheat Engine works again.
 * Always allow parrying from sides.
 * Allow parrying even if perviously in the attack range.
+* Delay resetting oldPos to make parrying easier.
 
 ## How to use
 
