@@ -25,12 +25,6 @@ This is a simple mod using **BepInEx 6** to modify the game **CardVenture:JustAH
 5. Run game once and edit config file at `CardventureJustAHeadDemo\BepInEx\config`.
 6. Enjoy~
 
-## TODO
-
-Maybe I should rewrite my transpilers using CodeMatcher.
-
-However I'm lazy and Deepseek just won't work.
-
 ## Misc
 
 <img src="misc/I Patched 100 Methods.png">

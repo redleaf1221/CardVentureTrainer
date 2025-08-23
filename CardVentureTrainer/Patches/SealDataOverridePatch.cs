@@ -4,7 +4,7 @@ using HarmonyLib;
 namespace CardVentureTrainer.Patches;
 
 [HarmonyPatch(typeof(BattleObject), nameof(BattleObject.InitAbilityPool))]
-public static class SealDataInitAbilityPollPatch {
+public static class SealDataOverridePatch {
     // ReSharper disable once InconsistentNaming
     private static void Prefix(BattleObject __instance) {
         // to bypass index out of range without transpiler.

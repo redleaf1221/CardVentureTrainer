@@ -31,54 +31,45 @@ public class Plugin : BaseUnityPlugin {
 
     private static void DoAllPatches() {
         if (Conf.EnableTestVersion) {
-            HarmonyInstance.PatchAll(typeof(EnableTestVersionPatch));
-            Logger.LogMessage("TestVersionPatch done.");
+            HarmonyInstance.PatchAll(typeof(TestVersionPatch));
+            Logger.LogInfo("TestVersionPatch done.");
         }
-        HarmonyInstance.PatchAll(typeof(DiamondShieldSetPricePatch));
-        Logger.LogMessage("DiamondShieldSetPricePatch done.");
-        HarmonyInstance.PatchAll(typeof(DiamondShieldWeaponDeadPatch));
-        Logger.LogMessage("DiamondShieldWeaponDeadPatch done.");
-        HarmonyInstance.PatchAll(typeof(DiamondShieldAddWeaponPatch));
-        Logger.LogMessage("DiamondShieldAddWeaponPatch done.");
+        HarmonyInstance.PatchAll(typeof(DiamondShieldPatch));
+        Logger.LogInfo("DiamondShieldPatch done.");
         if (Conf.EnableChapter3) {
-            HarmonyInstance.PatchAll(typeof(DemoRunChapterCompletePatch));
-            Logger.LogMessage("DemoRunChapterCompletePatch done.");
-            HarmonyInstance.PatchAll(typeof(DemoRunStartLevelPatch));
-            Logger.LogMessage("DemoRunStartLevelPatch done.");
+            HarmonyInstance.PatchAll(typeof(Chapter3Patch));
+            Logger.LogInfo("Chapter3Patch done.");
         }
         if (Conf.EnableUnusedRooms) {
-            HarmonyInstance.PatchAll(typeof(DemoRoomGetRandomRoomPatch));
-            Logger.LogMessage("DemoRoomGetRandomRoomPatch done.");
+            HarmonyInstance.PatchAll(typeof(UnusedRoomPatch));
+            Logger.LogInfo("UnusedRoomPatch done.");
         }
         if (Conf.EnableEasterEggLife) {
             HarmonyInstance.PatchAll(typeof(EasterEggLifePatch));
-            Logger.LogMessage("EasterEggLifePatch done.");
+            Logger.LogInfo("EasterEggLifePatch done.");
         }
-        if (Conf.EnableSealDataOverride) {
-            HarmonyInstance.PatchAll(typeof(SealDataInitAbilityPollPatch));
-            Logger.LogMessage("SealDataInitAbilityPollPatch done.");
+        if (Conf.SealDataList.Count > 0) {
+            Logger.LogInfo(Conf.SealDataList.Count);
+            HarmonyInstance.PatchAll(typeof(SealDataOverridePatch));
+            Logger.LogInfo("SealDataOverridePatch done.");
         }
         if (Conf.DisableHadoukenNegDamage) {
             HarmonyInstance.PatchAll(typeof(HadoukenRandomDamagePatch));
-            Logger.LogMessage("HadoukenRandomDamagePatch done.");
+            Logger.LogInfo("HadoukenRandomDamagePatch done.");
         }
-        HarmonyInstance.PatchAll(typeof(SafeIntGenerateKeyPatch));
-        Logger.LogMessage("SafeIntGenerateKeyPatch done.");
-        HarmonyInstance.PatchAll(typeof(SafeIntValueSetterPatch));
-        Logger.LogMessage("SafeIntValueGetPatch done.");
+        HarmonyInstance.PatchAll(typeof(SafeIntPatch));
+        Logger.LogInfo("SafeIntPatch done.");
         if (Conf.AlwaysParrySide) {
             HarmonyInstance.PatchAll(typeof(ParrySidePatch));
-            Logger.LogMessage("ParrySidePatch done.");
+            Logger.LogInfo("ParrySidePatch done.");
         }
         if (Conf.DisableParryOldPosCheck) {
             HarmonyInstance.PatchAll(typeof(ParryCheckOldPosPatch));
-            Logger.LogMessage("ParryCheckOldPosPatch done.");
+            Logger.LogInfo("ParryCheckOldPosPatch done.");
         }
         HarmonyInstance.PatchAll(typeof(ParryDebugPatch));
-        Logger.LogMessage("ParryDebugPatch done.");
-        if (Conf.DelayResetOldPos) {
-            HarmonyInstance.PatchAll(typeof(ParryDelayResetOldPosPatch));
-            Logger.LogMessage("ParryDelayResetOldPosPatch done.");
-        }
+        Logger.LogInfo("ParryDebugPatch done.");
+        HarmonyInstance.PatchAll(typeof(ResetOldPosDelayPatch));
+        Logger.LogInfo("ResetOldPosDelayPatch done.");
     }
 }
