@@ -54,8 +54,12 @@ public class Plugin : BaseUnityPlugin {
             Logger.LogInfo("ParryCheckOldPosPatch done.");
         }
         if (Conf.SpiderParryEnhance) {
-            HarmonyInstance.PatchAll(typeof(SpiderParryEnhance));
-            Logger.LogInfo("SpiderParryEnhance done.");
+            HarmonyInstance.PatchAll(typeof(SpiderParryEnhancePatch));
+            Logger.LogInfo("SpiderParryEnhancePatch done.");
+        }
+        if (Conf.DisableFriendUnitLimit) {
+            HarmonyInstance.PatchAll(typeof(FriendUnitLimitPatch));
+            Logger.LogInfo("FriendUnitLimitPatch done.");
         }
         HarmonyInstance.PatchAll(typeof(ParryDebugPatch));
         Logger.LogInfo("ParryDebugPatch done.");

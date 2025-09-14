@@ -11,6 +11,8 @@ This is a simple mod using **BepInEx 6** to modify the game **CardVenture:JustAH
 * Always allow parrying from sides.
 * Allow parrying even if perviously in the attack range.
 * Delay resetting oldPos to make parrying easier.
+* Disable friend unit spawn limit.
+* Reduce animation time to make parrying spiders easier.
 
 ## How to use
 
