@@ -18,7 +18,7 @@ public static class ParryDebugPatch {
         foreach (Vector2Int vector2Int3 in targetPos) {
             if (SingletonData<BattleObject>.Instance.playerObject.oldPos == vector2Int3) {
                 flag = true;
-                if(!Plugin.Conf.DisableParryOldPosCheck) flag2 = false;
+                if (!Plugin.Conf.DisableParryOldPosCheck) flag2 = false;
             }
             if (SingletonData<BattleObject>.Instance.playerObject.unitPos == vector2Int3) {
                 flag3 = true;
@@ -31,13 +31,16 @@ public static class ParryDebugPatch {
         if (SingletonData<BattleObject>.Instance.playerObject.oldPos == Vector2Int.zero) cantParryReasons.Add("oldPos is zero");
         if (SingletonData<BattleObject>.Instance.playerObject.aimDir != -__instance.aimDir &&
             !SingletonData<BattleObject>.Instance.canParrySide) cantParryReasons.Add("aimDir wrong");
-        if (__instance.unitCamp != UnitCamp.enemy &&
-            __instance.unitCamp != UnitCamp.enemy2 &&
-            __instance.unitCamp != UnitCamp.friend) cantParryReasons.Add("unitCamp wrong");
+        if (__instance.unitType == 204 || __instance.unitType == 205 || __instance.unitType == 220 || __instance.unitType == 209) {
+            cantParryReasons.Add($"unitType is {__instance.unitType}");
+            cantDodgeReasons.Add($"unitType is {__instance.unitType}");
+        }
+        if (__instance.unitCamp == UnitCamp.player) {
+            cantParryReasons.Add("unitCamp is player");
+            cantDodgeReasons.Add("unitCamp is player");
+        }
+        cantDodgeReasons.Add("unitHit contains player");
         if (!flag) cantDodgeReasons.Add("oldPos not in targetPos");
-        if (__instance.unitCamp != UnitCamp.enemy &&
-            __instance.unitCamp != UnitCamp.enemy2 &&
-            __instance.unitCamp != UnitCamp.friend) cantDodgeReasons.Add("unitCamp wrong");
         Plugin.Logger.LogMessage($"Can't parry because: {cantParryReasons.Join()}");
         Plugin.Logger.LogMessage($"Can't dodge because: {cantDodgeReasons.Join()}");
     }

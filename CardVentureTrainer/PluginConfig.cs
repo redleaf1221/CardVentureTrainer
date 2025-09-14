@@ -25,7 +25,7 @@ public class PluginConfig(Plugin plugin) {
         0.1f, "Adjust delay of resetting oldPos to make parrying easier or harder.");
 
     private readonly ConfigEntry<string> _configSealDataList = plugin.Config.Bind("General", "SealDataOverride",
-        "", "Override ability pools to choose from.\nLeave empty to disable.\nSample: 1200/1201/1299\n(1200:Bomb, 1201:Bat, 1202:Lighting, 1203:Spawn, 1299:Events)");
+        "", "Override ability pools to choose from.\nLeave empty to disable.\nSample: 1200/1201/1299\n(1200:Bomb, 1201:Bat, 1202:Lightning,\n 1203:Spawn, 1204:Burn, 1205:Shuriken,\n 1206:Prop, 1207:Cannon, 1208:Invincible, 1299:Events)");
 
     private readonly ConfigEntry<bool> _configSpiderParryEnhance = plugin.Config.Bind("Trainer", "SpiderParryEnhancePatch",
         false, "Reduce animation time to make parrying spiders easier.");

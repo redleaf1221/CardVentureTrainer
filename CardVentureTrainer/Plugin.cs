@@ -35,7 +35,6 @@ public class Plugin : BaseUnityPlugin {
             Logger.LogInfo("TestVersionPatch done.");
         }
         if (Conf.SealDataList.Count > 0) {
-            Logger.LogInfo(Conf.SealDataList.Count);
             HarmonyInstance.PatchAll(typeof(SealDataOverridePatch));
             Logger.LogInfo("SealDataOverridePatch done.");
         }
