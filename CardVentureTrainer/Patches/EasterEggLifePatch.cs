@@ -11,12 +11,12 @@ public static class EasterEggLifePatch {
             .MatchForward(false,
                 new CodeMatch(OpCodes.Ldc_R4, 0.05f)
             )
-            .ThrowIfInvalid("Failed to patch BattleObject.runChapterComplete!!")
+            .ThrowIfInvalid("Failed to patch RoomAbility.InLifeAbilityRoom!!")
             .SetOperandAndAdvance(0.4f)
             .MatchForward(false,
                 new CodeMatch(OpCodes.Ldc_R4, 0.1f)
             )
-            .ThrowIfInvalid("Failed to patch BattleObject.runChapterComplete!!")
+            .ThrowIfInvalid("Failed to patch RoomAbility.InLifeAbilityRoom!!")
             .SetOperandAndAdvance(0.8f)
             .InstructionEnumeration();
     }
