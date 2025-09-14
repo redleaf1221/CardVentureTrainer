@@ -34,20 +34,6 @@ public class Plugin : BaseUnityPlugin {
             HarmonyInstance.PatchAll(typeof(TestVersionPatch));
             Logger.LogInfo("TestVersionPatch done.");
         }
-        HarmonyInstance.PatchAll(typeof(DiamondShieldPatch));
-        Logger.LogInfo("DiamondShieldPatch done.");
-        if (Conf.EnableChapter3) {
-            HarmonyInstance.PatchAll(typeof(Chapter3Patch));
-            Logger.LogInfo("Chapter3Patch done.");
-        }
-        if (Conf.EnableUnusedRooms) {
-            HarmonyInstance.PatchAll(typeof(UnusedRoomPatch));
-            Logger.LogInfo("UnusedRoomPatch done.");
-        }
-        if (Conf.EnableEasterEggLife) {
-            HarmonyInstance.PatchAll(typeof(EasterEggLifePatch));
-            Logger.LogInfo("EasterEggLifePatch done.");
-        }
         if (Conf.SealDataList.Count > 0) {
             Logger.LogInfo(Conf.SealDataList.Count);
             HarmonyInstance.PatchAll(typeof(SealDataOverridePatch));
@@ -66,6 +52,10 @@ public class Plugin : BaseUnityPlugin {
         if (Conf.DisableParryOldPosCheck) {
             HarmonyInstance.PatchAll(typeof(ParryCheckOldPosPatch));
             Logger.LogInfo("ParryCheckOldPosPatch done.");
+        }
+        if (Conf.SpiderParryEnhance) {
+            HarmonyInstance.PatchAll(typeof(SpiderParryEnhance));
+            Logger.LogInfo("SpiderParryEnhance done.");
         }
         HarmonyInstance.PatchAll(typeof(ParryDebugPatch));
         Logger.LogInfo("ParryDebugPatch done.");
