@@ -2,7 +2,7 @@
 
 ## Features
 
-This is a simple mod using **BepInEx 6** to modify the game **CardVenture:JustAHead** (demo**0912**), which includes following features:
+This is a simple mod using **BepInEx 6** to modify the game **CardVenture:JustAHead** (demo**0914**), which includes following features:
 
 * Enable test version features, the debug menu.
 * Seal some of the ability pools.
@@ -22,6 +22,14 @@ This is a simple mod using **BepInEx 6** to modify the game **CardVenture:JustAH
 4. Move `CardVentureTrainer.dll` to `CardventureJustAHeadDemo\BepInEx\plugins`.
 5. Run game once and edit config file at `CardventureJustAHeadDemo\BepInEx\config`.
 6. Enjoy~
+
+## TODO
+
+- [x] Massive refactor to allow dynamic config.
+- [ ] Implement GUI for cheating and toggling configs.
+- [ ] More features:
+- [ ] Render oldPos in realtime.
+- [ ] Delete abilities and change cooltime of abilities.
 
 ## Misc
 
