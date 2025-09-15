@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection.Emit;
 using HarmonyLib;
-using UnityEngine;
+using static CardVentureTrainer.Plugin;
 
 namespace CardVentureTrainer.Patches;
 
@@ -14,7 +13,17 @@ public static class ResetOldPosDelayPatch {
                 new CodeMatch(OpCodes.Ldc_R4, 0.1f)
             )
             .ThrowIfInvalid("Failed to patch UnitObjectPlayer.ResetDodgeAfterDelay!!")
-            .SetOperandAndAdvance(Plugin.Conf.ResetOldPosDelay)
+            .SetOperandAndAdvance(Conf.ConfigResetOldPosDelay.Value)
             .InstructionEnumeration();
+    }
+    public static void RegisterThis(Harmony harmony) {
+        harmony.PatchAll(typeof(ResetOldPosDelayPatch));
+        Conf.ConfigResetOldPosDelay.SettingChanged += (sender, args) => {
+            Logger.LogInfo($"ResetOldPosDelay changed to {Conf.ConfigResetOldPosDelay.Value}.");
+            harmony.Unpatch(AccessTools.EnumeratorMoveNext(typeof(UnitObjectPlayer).GetMethod(nameof(UnitObjectPlayer.ResetDodgeAfterDelay))),
+                typeof(ResetOldPosDelayPatch).GetMethod(nameof(Transpiler)));
+            harmony.PatchAll(typeof(ResetOldPosDelayPatch));
+        };
+        Logger.LogInfo("ResetOldPosDelayPatch done.");
     }
 }

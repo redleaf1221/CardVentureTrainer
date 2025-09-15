@@ -1,4 +1,5 @@
 using HarmonyLib;
+using static CardVentureTrainer.Plugin;
 
 namespace CardVentureTrainer.Patches;
 
@@ -20,5 +21,10 @@ public static class SafeIntPatch {
         __instance.key = 0;
         __instance.encryptedValue = value;
         return false;
+    }
+
+    public static void RegisterThis(Harmony harmony) {
+        harmony.PatchAll(typeof(SafeIntPatch));
+        Logger.LogInfo("SafeIntPatch done.");
     }
 }

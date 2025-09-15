@@ -24,45 +24,21 @@ public class Plugin : BaseUnityPlugin {
 
         HarmonyInstance = new Harmony(MyPluginInfo.PLUGIN_GUID);
 
-        DoAllPatches();
+        RegisterEvents();
 
         Logger.LogMessage($"Plugin {MyPluginInfo.PLUGIN_GUID} loaded!");
     }
 
-    private static void DoAllPatches() {
-        if (Conf.EnableTestVersion) {
-            HarmonyInstance.PatchAll(typeof(TestVersionPatch));
-            Logger.LogInfo("TestVersionPatch done.");
-        }
-        if (Conf.SealDataList.Count > 0) {
-            HarmonyInstance.PatchAll(typeof(SealDataOverridePatch));
-            Logger.LogInfo("SealDataOverridePatch done.");
-        }
-        if (Conf.DisableHadoukenNegDamage) {
-            HarmonyInstance.PatchAll(typeof(HadoukenRandomDamagePatch));
-            Logger.LogInfo("HadoukenRandomDamagePatch done.");
-        }
-        HarmonyInstance.PatchAll(typeof(SafeIntPatch));
-        Logger.LogInfo("SafeIntPatch done.");
-        if (Conf.AlwaysParrySide) {
-            HarmonyInstance.PatchAll(typeof(ParrySidePatch));
-            Logger.LogInfo("ParrySidePatch done.");
-        }
-        if (Conf.DisableParryOldPosCheck) {
-            HarmonyInstance.PatchAll(typeof(ParryCheckOldPosPatch));
-            Logger.LogInfo("ParryCheckOldPosPatch done.");
-        }
-        if (Conf.SpiderParryEnhance) {
-            HarmonyInstance.PatchAll(typeof(SpiderParryEnhancePatch));
-            Logger.LogInfo("SpiderParryEnhancePatch done.");
-        }
-        if (Conf.DisableFriendUnitLimit) {
-            HarmonyInstance.PatchAll(typeof(FriendUnitLimitPatch));
-            Logger.LogInfo("FriendUnitLimitPatch done.");
-        }
-        HarmonyInstance.PatchAll(typeof(ParryDebugPatch));
-        Logger.LogInfo("ParryDebugPatch done.");
-        HarmonyInstance.PatchAll(typeof(ResetOldPosDelayPatch));
-        Logger.LogInfo("ResetOldPosDelayPatch done.");
+    private static void RegisterEvents() {
+        TestVersionPatch.RegisterThis(HarmonyInstance);
+        SpiderParryEnhancePatch.RegisterThis(HarmonyInstance);
+        SealDataOverridePatch.RegisterThis(HarmonyInstance);
+        HadoukenRandomDamagePatch.RegisterThis(HarmonyInstance);
+        SafeIntPatch.RegisterThis(HarmonyInstance);
+        ParrySidePatch.RegisterThis(HarmonyInstance);
+        ParryCheckOldPosPatch.RegisterThis(HarmonyInstance);
+        FriendUnitLimitPatch.RegisterThis(HarmonyInstance);
+        ParryDebugPatch.RegisterThis(HarmonyInstance);
+        ResetOldPosDelayPatch.RegisterThis(HarmonyInstance);
     }
 }

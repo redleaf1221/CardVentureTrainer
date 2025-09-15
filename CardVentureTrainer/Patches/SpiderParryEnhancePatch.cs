@@ -1,4 +1,5 @@
 using HarmonyLib;
+using static CardVentureTrainer.Plugin;
 
 namespace CardVentureTrainer.Patches;
 
@@ -11,6 +12,16 @@ public static class SpiderParryEnhancePatch {
         typeof(UnitObjectAbility), typeof(StateMachine), typeof(string), typeof(bool))]
     // ReSharper disable once InconsistentNaming
     private static void Constructor(ref UnitAtkStateJump __instance) {
-        __instance.speed *= 2;
+        if (Conf.ConfigSpiderParryEnhance.Value) {
+            __instance.speed *= 2;
+        }
+    }
+
+    public static void RegisterThis(Harmony harmony) {
+        harmony.PatchAll(typeof(SpiderParryEnhancePatch));
+        Conf.ConfigSpiderParryEnhance.SettingChanged += (sender, args) => {
+            Logger.LogInfo($"SpiderParryEnhance changed to {Conf.ConfigSpiderParryEnhance.Value}.");
+        };
+        Logger.LogInfo("SpiderParryEnhancePatch done.");
     }
 }
