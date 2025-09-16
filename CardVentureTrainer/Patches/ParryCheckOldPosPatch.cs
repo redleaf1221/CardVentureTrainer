@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Reflection.Emit;
+using BepInEx.Configuration;
 using HarmonyLib;
 using static CardVentureTrainer.Plugin;
 
@@ -7,8 +8,15 @@ namespace CardVentureTrainer.Patches;
 
 [HarmonyPatch(typeof(UnitObjectAbility), nameof(UnitObjectAbility.AddDamageRange))]
 public static class ParryCheckOldPosPatch {
+    private static ConfigEntry<bool> _configEnabled;
+
+    public static bool Enabled {
+        get => _configEnabled.Value;
+        set => _configEnabled.Value = value;
+    }
+
     private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) {
-        if (!Conf.ConfigDisableParryOldPosCheck.Value) {
+        if (!Enabled) {
             return instructions;
         }
         return new CodeMatcher(instructions)
@@ -24,10 +32,15 @@ public static class ParryCheckOldPosPatch {
             .SetAndAdvance(OpCodes.Nop, null)
             .InstructionEnumeration();
     }
+
+    public static void InitConfig(Plugin plugin) {
+        _configEnabled = plugin.Config.Bind("Trainer", "DisableParryOldPosCheck",
+            false, "Allow parrying even if perviously in the attack range.");
+    }
     public static void RegisterThis(Harmony harmony) {
         harmony.PatchAll(typeof(ParryCheckOldPosPatch));
-        Conf.ConfigDisableParryOldPosCheck.SettingChanged += (sender, args) => {
-            Logger.LogInfo($"DisableParryOldPosCheck changed to {Conf.ConfigDisableParryOldPosCheck.Value}.");
+        _configEnabled.SettingChanged += (sender, args) => {
+            Logger.LogInfo($"DisableParryOldPosCheck changed to {Enabled}.");
             harmony.Unpatch(typeof(UnitObjectPlayer).GetMethod(nameof(UnitObjectAbility.AddDamageRange)),
                 typeof(ParryCheckOldPosPatch).GetMethod(nameof(Transpiler)));
             harmony.PatchAll(typeof(ParryCheckOldPosPatch));

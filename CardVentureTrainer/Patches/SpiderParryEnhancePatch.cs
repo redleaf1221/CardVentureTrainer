@@ -1,3 +1,4 @@
+using BepInEx.Configuration;
 using HarmonyLib;
 using static CardVentureTrainer.Plugin;
 
@@ -7,20 +8,32 @@ namespace CardVentureTrainer.Patches;
 // Because changing the animation itself just looks strange.
 [HarmonyPatch]
 public static class SpiderParryEnhancePatch {
+    private static ConfigEntry<bool> _configEnabled;
+
+    public static bool Enabled {
+        get => _configEnabled.Value;
+        set => _configEnabled.Value = value;
+    }
+
     [HarmonyPostfix]
     [HarmonyPatch(typeof(UnitAtkStateJump), MethodType.Constructor,
         typeof(UnitObjectAbility), typeof(StateMachine), typeof(string), typeof(bool))]
     // ReSharper disable once InconsistentNaming
     private static void Constructor(ref UnitAtkStateJump __instance) {
-        if (Conf.ConfigSpiderParryEnhance.Value) {
+        if (Enabled) {
             __instance.speed *= 2;
         }
     }
 
+    public static void InitConfig(Plugin plugin) {
+        _configEnabled = plugin.Config.Bind("Trainer", "SpiderParryEnhance",
+            false, "Reduce animation time to make parrying spiders easier.");
+    }
+
     public static void RegisterThis(Harmony harmony) {
         harmony.PatchAll(typeof(SpiderParryEnhancePatch));
-        Conf.ConfigSpiderParryEnhance.SettingChanged += (sender, args) => {
-            Logger.LogInfo($"SpiderParryEnhance changed to {Conf.ConfigSpiderParryEnhance.Value}.");
+        _configEnabled.SettingChanged += (sender, args) => {
+            Logger.LogInfo($"SpiderParryEnhance changed to {Enabled}.");
         };
         Logger.LogInfo("SpiderParryEnhancePatch done.");
     }

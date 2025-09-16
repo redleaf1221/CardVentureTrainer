@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using HarmonyLib;
 using UnityEngine;
-using static CardVentureTrainer.Plugin;
 
 namespace CardVentureTrainer.Patches;
 
@@ -19,7 +18,7 @@ public static class ParryDebugPatch {
         foreach (Vector2Int vector2Int3 in targetPos) {
             if (SingletonData<BattleObject>.Instance.playerObject.oldPos == vector2Int3) {
                 flag = true;
-                if (!Conf.ConfigDisableParryOldPosCheck.Value) flag2 = false;
+                if (ParryCheckOldPosPatch.Enabled) flag2 = false;
             }
             if (SingletonData<BattleObject>.Instance.playerObject.unitPos == vector2Int3) {
                 flag3 = true;

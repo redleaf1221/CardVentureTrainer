@@ -11,7 +11,6 @@ namespace CardVentureTrainer;
 [SuppressMessage("Class Declaration", "BepInEx002:Classes with BepInPlugin attribute must inherit from BaseUnityPlugin")]
 public class Plugin : BaseUnityPlugin {
     public new static ManualLogSource Logger;
-    public static PluginConfig Conf;
 
     // ReSharper disable once MemberCanBePrivate.Global
     public static Harmony HarmonyInstance;
@@ -20,8 +19,6 @@ public class Plugin : BaseUnityPlugin {
     private void Awake() {
         Logger = base.Logger;
 
-        Conf = new PluginConfig(this);
-
         HarmonyInstance = new Harmony(MyPluginInfo.PLUGIN_GUID);
 
         RegisterEvents();
@@ -29,16 +26,33 @@ public class Plugin : BaseUnityPlugin {
         Logger.LogMessage($"Plugin {MyPluginInfo.PLUGIN_GUID} loaded!");
     }
 
-    private static void RegisterEvents() {
+    private void RegisterEvents() {
+        TestVersionPatch.InitConfig(this);
         TestVersionPatch.RegisterThis(HarmonyInstance);
+
+        SpiderParryEnhancePatch.InitConfig(this);
         SpiderParryEnhancePatch.RegisterThis(HarmonyInstance);
+
+        SealDataOverridePatch.InitConfig(this);
         SealDataOverridePatch.RegisterThis(HarmonyInstance);
+
+        HadoukenRandomDamagePatch.InitConfig(this);
         HadoukenRandomDamagePatch.RegisterThis(HarmonyInstance);
+
         SafeIntPatch.RegisterThis(HarmonyInstance);
+
+        ParrySidePatch.InitConfig(this);
         ParrySidePatch.RegisterThis(HarmonyInstance);
+
+        ParryCheckOldPosPatch.InitConfig(this);
         ParryCheckOldPosPatch.RegisterThis(HarmonyInstance);
+
+        FriendUnitLimitPatch.InitConfig(this);
         FriendUnitLimitPatch.RegisterThis(HarmonyInstance);
+
         ParryDebugPatch.RegisterThis(HarmonyInstance);
+
+        ResetOldPosDelayPatch.InitConfig(this);
         ResetOldPosDelayPatch.RegisterThis(HarmonyInstance);
     }
 }
