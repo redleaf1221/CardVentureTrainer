@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Reflection;
 using System.Reflection.Emit;
 using BepInEx.Configuration;
 using HarmonyLib;
@@ -39,8 +40,10 @@ public static class ParryCheckOldPosPatch {
         HarmonyInstance.PatchAll(typeof(ParryCheckOldPosPatch));
         _configEnabled.SettingChanged += (sender, args) => {
             Logger.LogInfo($"DisableParryOldPosCheck changed to {Enabled}.");
-            HarmonyInstance.Unpatch(typeof(UnitObjectPlayer).GetMethod(nameof(UnitObjectAbility.AddDamageRange)),
-                typeof(ParryCheckOldPosPatch).GetMethod(nameof(Transpiler)));
+            HarmonyInstance.Unpatch(typeof(UnitObjectAbility).GetMethod(nameof(UnitObjectAbility.AddDamageRange),
+                    BindingFlags.Public | BindingFlags.Instance),
+                typeof(ParryCheckOldPosPatch).GetMethod(nameof(Transpiler),
+                    BindingFlags.NonPublic | BindingFlags.Static));
             HarmonyInstance.PatchAll(typeof(ParryCheckOldPosPatch));
         };
         Logger.LogInfo("ParryCheckOldPosPatch done.");

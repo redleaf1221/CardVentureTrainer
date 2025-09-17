@@ -1,9 +1,12 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
 using BepInEx.Unity.Mono;
 using CardVentureTrainer.Patches;
+using CardVentureTrainer.UI;
 using HarmonyLib;
 
 namespace CardVentureTrainer;
@@ -25,6 +28,8 @@ public class Plugin : BaseUnityPlugin {
         HarmonyInstance = new Harmony(MyPluginInfo.PLUGIN_GUID);
 
         InitPatches();
+
+        gameObject.AddComponent<WindowManager>();
 
         Logger.LogMessage($"Plugin {MyPluginInfo.PLUGIN_GUID} loaded!");
     }

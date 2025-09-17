@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Reflection;
 using System.Reflection.Emit;
 using BepInEx.Configuration;
 using HarmonyLib;
@@ -45,8 +46,10 @@ public class FriendUnitLimitPatch {
         HarmonyInstance.PatchAll(typeof(FriendUnitLimitPatch));
         _configEnabled.SettingChanged += (sender, args) => {
             Logger.LogInfo($"DisableFriendUnitLimit changed to {Enabled}.");
-            HarmonyInstance.Unpatch(typeof(BattleObject).GetMethod(nameof(BattleObject.SpawnUnit)),
-                typeof(FriendUnitLimitPatch).GetMethod(nameof(SpawnUnitTranspiler)));
+            HarmonyInstance.Unpatch(typeof(BattleObject).GetMethod(nameof(BattleObject.SpawnUnit), 
+                    BindingFlags.Public | BindingFlags.Instance),
+                typeof(FriendUnitLimitPatch).GetMethod(nameof(SpawnUnitTranspiler), 
+                    BindingFlags.NonPublic | BindingFlags.Static));
             HarmonyInstance.PatchAll(typeof(FriendUnitLimitPatch));
         };
         Logger.LogInfo("FriendUnitLimitPatch done.");

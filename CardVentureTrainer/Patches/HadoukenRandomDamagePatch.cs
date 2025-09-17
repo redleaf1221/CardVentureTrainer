@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Reflection;
 using System.Reflection.Emit;
 using BepInEx.Configuration;
 using HarmonyLib;
@@ -39,8 +40,10 @@ public static class HadoukenRandomDamagePatch {
         HarmonyInstance.PatchAll(typeof(HadoukenRandomDamagePatch));
         _configEnabled.SettingChanged += (sender, args) => {
             Plugin.Logger.LogInfo($"DisableHadoukenNegativeDamage changed to {Enabled}.");
-            HarmonyInstance.Unpatch(typeof(UnitObjectPlayer).GetMethod(nameof(UnitObjectPlayer.PlayerInputCheck)),
-                typeof(HadoukenRandomDamagePatch).GetMethod(nameof(Transpiler)));
+            HarmonyInstance.Unpatch(typeof(UnitObjectPlayer).GetMethod(nameof(UnitObjectPlayer.PlayerInputCheck),
+                    BindingFlags.NonPublic | BindingFlags.Instance),
+                typeof(HadoukenRandomDamagePatch).GetMethod(nameof(Transpiler),
+                    BindingFlags.NonPublic | BindingFlags.Static));
             HarmonyInstance.PatchAll(typeof(HadoukenRandomDamagePatch));
         };
         Plugin.Logger.LogInfo("HadoukenRandomDamagePatch done.");
