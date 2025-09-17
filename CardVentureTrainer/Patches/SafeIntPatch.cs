@@ -23,7 +23,7 @@ public static class SafeIntPatch {
         return false;
     }
 
-    public static void RegisterThis(Harmony harmony) {
+    public static void InitPatch(Plugin plugin, Harmony harmony) {
         harmony.PatchAll(typeof(SafeIntPatch));
         Logger.LogInfo("SafeIntPatch done.");
     }

@@ -20,12 +20,10 @@ public static class ParrySidePatch {
         }
     }
 
-    public static void InitConfig(Plugin plugin) {
+    public static void InitPatch(Plugin plugin, Harmony harmony) {
         _configEnabled = plugin.Config.Bind("Trainer", "EnableParrySide",
             false, "Allow parrying from sides.");
-    }
-
-    public static void RegisterThis(Harmony harmony) {
+        
         harmony.PatchAll(typeof(ParrySidePatch));
         _configEnabled.SettingChanged += (sender, args) => {
             Logger.LogInfo($"EnableParrySide changed to {Enabled}.");

@@ -31,11 +31,10 @@ public static class HadoukenRandomDamagePatch {
             .SetOpcodeAndAdvance(OpCodes.Br)
             .InstructionEnumeration();
     }
-    public static void InitConfig(Plugin plugin) {
+    public static void InitPatch(Plugin plugin, Harmony harmony) {
         _configEnabled = plugin.Config.Bind("Trainer", "DisableHadoukenNegativeDamage",
             false, "Disable negative damage of ability Hadouken.");
-    }
-    public static void RegisterThis(Harmony harmony) {
+
         harmony.PatchAll(typeof(HadoukenRandomDamagePatch));
         _configEnabled.SettingChanged += (sender, args) => {
             Plugin.Logger.LogInfo($"DisableHadoukenNegativeDamage changed to {Enabled}.");

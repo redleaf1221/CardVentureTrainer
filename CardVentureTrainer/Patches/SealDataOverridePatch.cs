@@ -30,14 +30,12 @@ public static class SealDataOverridePatch {
         __instance.schoolDataNow = new List<int>(SchoolData);
     }
 
-    public static void InitConfig(Plugin plugin) {
+    public static void InitPatch(Plugin plugin, Harmony harmony) {
         _configSchoolData = plugin.Config.Bind("General", "SealDataOverride",
             "", "Override ability pools to choose from.\nLeave empty to disable.\nSample: 1200/1201/1299\n(1200:Bomb, 1201:Bat, 1202:Lightning,\n 1203:Spawn, 1204:Burn, 1205:Shuriken,\n 1206:Prop, 1207:Cannon, 1208:Invincible, 1299:Events)");
         if (!_parseSchoolData(_configSchoolData.Value, out List<int> result)) _configSchoolData.Value = "";
         _patchSchoolData = result;
-    }
-
-    public static void RegisterThis(Harmony harmony) {
+        
         harmony.PatchAll(typeof(SealDataOverridePatch));
         _configSchoolData.SettingChanged += (sender, args) => {
             Logger.LogInfo($"SealDataList changed to {_configSchoolData.Value}.");

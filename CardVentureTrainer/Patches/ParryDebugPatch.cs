@@ -46,7 +46,7 @@ public static class ParryDebugPatch {
         Plugin.Logger.LogMessage($"Can't dodge because: {cantDodgeReasons.Join()}");
     }
 
-    public static void RegisterThis(Harmony harmony) {
+    public static void InitPatch(Plugin plugin, Harmony harmony) {
         harmony.PatchAll(typeof(ParryDebugPatch));
         Plugin.Logger.LogInfo("ParryDebugPatch done.");
     }

@@ -33,11 +33,9 @@ public static class ParryCheckOldPosPatch {
             .InstructionEnumeration();
     }
 
-    public static void InitConfig(Plugin plugin) {
+    public static void InitPatch(Plugin plugin, Harmony harmony) {
         _configEnabled = plugin.Config.Bind("Trainer", "DisableParryOldPosCheck",
             false, "Allow parrying even if perviously in the attack range.");
-    }
-    public static void RegisterThis(Harmony harmony) {
         harmony.PatchAll(typeof(ParryCheckOldPosPatch));
         _configEnabled.SettingChanged += (sender, args) => {
             Logger.LogInfo($"DisableParryOldPosCheck changed to {Enabled}.");

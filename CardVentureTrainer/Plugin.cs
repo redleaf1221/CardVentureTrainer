@@ -12,47 +12,29 @@ namespace CardVentureTrainer;
 public class Plugin : BaseUnityPlugin {
     public new static ManualLogSource Logger;
 
-    // ReSharper disable once MemberCanBePrivate.Global
-    public static Harmony HarmonyInstance;
+    private static Harmony _harmonyInstance;
 
 
     private void Awake() {
         Logger = base.Logger;
 
-        HarmonyInstance = new Harmony(MyPluginInfo.PLUGIN_GUID);
+        _harmonyInstance = new Harmony(MyPluginInfo.PLUGIN_GUID);
 
-        RegisterEvents();
+        InitPatches();
 
         Logger.LogMessage($"Plugin {MyPluginInfo.PLUGIN_GUID} loaded!");
     }
 
-    private void RegisterEvents() {
-        TestVersionPatch.InitConfig(this);
-        TestVersionPatch.RegisterThis(HarmonyInstance);
-
-        SpiderParryEnhancePatch.InitConfig(this);
-        SpiderParryEnhancePatch.RegisterThis(HarmonyInstance);
-
-        SealDataOverridePatch.InitConfig(this);
-        SealDataOverridePatch.RegisterThis(HarmonyInstance);
-
-        HadoukenRandomDamagePatch.InitConfig(this);
-        HadoukenRandomDamagePatch.RegisterThis(HarmonyInstance);
-
-        SafeIntPatch.RegisterThis(HarmonyInstance);
-
-        ParrySidePatch.InitConfig(this);
-        ParrySidePatch.RegisterThis(HarmonyInstance);
-
-        ParryCheckOldPosPatch.InitConfig(this);
-        ParryCheckOldPosPatch.RegisterThis(HarmonyInstance);
-
-        FriendUnitLimitPatch.InitConfig(this);
-        FriendUnitLimitPatch.RegisterThis(HarmonyInstance);
-
-        ParryDebugPatch.RegisterThis(HarmonyInstance);
-
-        ResetOldPosDelayPatch.InitConfig(this);
-        ResetOldPosDelayPatch.RegisterThis(HarmonyInstance);
+    private void InitPatches() {
+        TestVersionPatch.InitPatch(this, _harmonyInstance);
+        SpiderParryEnhancePatch.InitPatch(this, _harmonyInstance);
+        SealDataOverridePatch.InitPatch(this, _harmonyInstance);
+        HadoukenRandomDamagePatch.InitPatch(this, _harmonyInstance);
+        SafeIntPatch.InitPatch(this, _harmonyInstance);
+        ParrySidePatch.InitPatch(this, _harmonyInstance);
+        ParryCheckOldPosPatch.InitPatch(this, _harmonyInstance);
+        FriendUnitLimitPatch.InitPatch(this, _harmonyInstance);
+        ParryDebugPatch.InitPatch(this, _harmonyInstance);
+        ResetOldPosDelayPatch.InitPatch(this, _harmonyInstance);
     }
 }

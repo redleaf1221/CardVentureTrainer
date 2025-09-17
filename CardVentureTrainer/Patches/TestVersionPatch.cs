@@ -17,12 +17,9 @@ public static class TestVersionPatch {
         GameSettings.testVersion = Enabled;
     }
 
-    public static void InitConfig(Plugin plugin) {
+    public static void InitPatch(Plugin plugin, Harmony harmony) {
         _configEnabled = plugin.Config.Bind("General", "EnableTestVersion",
             true, "Enable internal debug menu.");
-    }
-
-    public static void RegisterThis(Harmony harmony) {
         harmony.PatchAll(typeof(TestVersionPatch));
         _configEnabled.SettingChanged += (sender, args) => {
             Logger.LogInfo($"EnableTestVersion changed to {Enabled}.");

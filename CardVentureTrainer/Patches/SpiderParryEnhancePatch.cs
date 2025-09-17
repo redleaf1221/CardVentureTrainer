@@ -25,12 +25,9 @@ public static class SpiderParryEnhancePatch {
         }
     }
 
-    public static void InitConfig(Plugin plugin) {
+    public static void InitPatch(Plugin plugin, Harmony harmony) {
         _configEnabled = plugin.Config.Bind("Trainer", "SpiderParryEnhance",
             false, "Reduce animation time to make parrying spiders easier.");
-    }
-
-    public static void RegisterThis(Harmony harmony) {
         harmony.PatchAll(typeof(SpiderParryEnhancePatch));
         _configEnabled.SettingChanged += (sender, args) => {
             Logger.LogInfo($"SpiderParryEnhance changed to {Enabled}.");
