@@ -17,10 +17,10 @@ public static class TestVersionPatch {
         GameSettings.testVersion = Enabled;
     }
 
-    public static void InitPatch(Plugin plugin, Harmony harmony) {
-        _configEnabled = plugin.Config.Bind("General", "EnableTestVersion",
+    public static void InitPatch() {
+        _configEnabled = Config.Bind("General", "EnableTestVersion",
             true, "Enable internal debug menu.");
-        harmony.PatchAll(typeof(TestVersionPatch));
+        HarmonyInstance.PatchAll(typeof(TestVersionPatch));
         _configEnabled.SettingChanged += (sender, args) => {
             Logger.LogInfo($"EnableTestVersion changed to {Enabled}.");
             Logger.LogInfo("However this won't work until next restart.");

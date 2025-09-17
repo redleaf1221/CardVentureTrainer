@@ -3,6 +3,7 @@ using System.Reflection.Emit;
 using BepInEx.Configuration;
 using HarmonyLib;
 using UnityEngine;
+using static CardVentureTrainer.Plugin;
 
 namespace CardVentureTrainer.Patches;
 
@@ -31,16 +32,16 @@ public static class HadoukenRandomDamagePatch {
             .SetOpcodeAndAdvance(OpCodes.Br)
             .InstructionEnumeration();
     }
-    public static void InitPatch(Plugin plugin, Harmony harmony) {
-        _configEnabled = plugin.Config.Bind("Trainer", "DisableHadoukenNegativeDamage",
+    public static void InitPatch() {
+        _configEnabled = Config.Bind("Trainer", "DisableHadoukenNegativeDamage",
             false, "Disable negative damage of ability Hadouken.");
 
-        harmony.PatchAll(typeof(HadoukenRandomDamagePatch));
+        HarmonyInstance.PatchAll(typeof(HadoukenRandomDamagePatch));
         _configEnabled.SettingChanged += (sender, args) => {
             Plugin.Logger.LogInfo($"DisableHadoukenNegativeDamage changed to {Enabled}.");
-            harmony.Unpatch(typeof(UnitObjectPlayer).GetMethod(nameof(UnitObjectPlayer.PlayerInputCheck)),
+            HarmonyInstance.Unpatch(typeof(UnitObjectPlayer).GetMethod(nameof(UnitObjectPlayer.PlayerInputCheck)),
                 typeof(HadoukenRandomDamagePatch).GetMethod(nameof(Transpiler)));
-            harmony.PatchAll(typeof(HadoukenRandomDamagePatch));
+            HarmonyInstance.PatchAll(typeof(HadoukenRandomDamagePatch));
         };
         Plugin.Logger.LogInfo("HadoukenRandomDamagePatch done.");
     }

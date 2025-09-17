@@ -23,17 +23,17 @@ public static class ResetOldPosDelayPatch {
             .InstructionEnumeration();
     }
 
-    public static void InitPatch(Plugin plugin, Harmony harmony) {
-        _configDelay = plugin.Config.Bind("Trainer", "ResetOldPosDelay",
+    public static void InitPatch() {
+        _configDelay = Config.Bind("Trainer", "ResetOldPosDelay",
             0.1f, "Adjust delay of resetting oldPos to make parrying easier or harder.");
         if (Delay < 0) _configDelay.Value = 0.1f;
-        
-        harmony.PatchAll(typeof(ResetOldPosDelayPatch));
+
+        HarmonyInstance.PatchAll(typeof(ResetOldPosDelayPatch));
         _configDelay.SettingChanged += (sender, args) => {
             Logger.LogInfo($"ResetOldPosDelay changed to {Delay}.");
-            harmony.Unpatch(AccessTools.EnumeratorMoveNext(typeof(UnitObjectPlayer).GetMethod(nameof(UnitObjectPlayer.ResetDodgeAfterDelay))),
+            HarmonyInstance.Unpatch(AccessTools.EnumeratorMoveNext(typeof(UnitObjectPlayer).GetMethod(nameof(UnitObjectPlayer.ResetDodgeAfterDelay))),
                 typeof(ResetOldPosDelayPatch).GetMethod(nameof(Transpiler)));
-            harmony.PatchAll(typeof(ResetOldPosDelayPatch));
+            HarmonyInstance.PatchAll(typeof(ResetOldPosDelayPatch));
         };
         Logger.LogInfo("ResetOldPosDelayPatch done.");
     }

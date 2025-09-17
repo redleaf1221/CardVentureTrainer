@@ -38,16 +38,16 @@ public class FriendUnitLimitPatch {
             .InstructionEnumeration();
     }
 
-    public static void InitPatch(Plugin plugin, Harmony harmony) {
-        _configEnabled = plugin.Config.Bind("Trainer", "DisableFriendUnitLimit",
+    public static void InitPatch() {
+        _configEnabled = Config.Bind("Trainer", "DisableFriendUnitLimit",
             false, "Disable friend unit spawn limit.");
-        
-        harmony.PatchAll(typeof(FriendUnitLimitPatch));
+
+        HarmonyInstance.PatchAll(typeof(FriendUnitLimitPatch));
         _configEnabled.SettingChanged += (sender, args) => {
             Logger.LogInfo($"DisableFriendUnitLimit changed to {Enabled}.");
-            harmony.Unpatch(typeof(BattleObject).GetMethod(nameof(BattleObject.SpawnUnit)),
+            HarmonyInstance.Unpatch(typeof(BattleObject).GetMethod(nameof(BattleObject.SpawnUnit)),
                 typeof(FriendUnitLimitPatch).GetMethod(nameof(SpawnUnitTranspiler)));
-            harmony.PatchAll(typeof(FriendUnitLimitPatch));
+            HarmonyInstance.PatchAll(typeof(FriendUnitLimitPatch));
         };
         Logger.LogInfo("FriendUnitLimitPatch done.");
     }

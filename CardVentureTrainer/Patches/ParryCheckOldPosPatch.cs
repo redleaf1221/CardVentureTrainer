@@ -33,15 +33,15 @@ public static class ParryCheckOldPosPatch {
             .InstructionEnumeration();
     }
 
-    public static void InitPatch(Plugin plugin, Harmony harmony) {
-        _configEnabled = plugin.Config.Bind("Trainer", "DisableParryOldPosCheck",
+    public static void InitPatch() {
+        _configEnabled = Config.Bind("Trainer", "DisableParryOldPosCheck",
             false, "Allow parrying even if perviously in the attack range.");
-        harmony.PatchAll(typeof(ParryCheckOldPosPatch));
+        HarmonyInstance.PatchAll(typeof(ParryCheckOldPosPatch));
         _configEnabled.SettingChanged += (sender, args) => {
             Logger.LogInfo($"DisableParryOldPosCheck changed to {Enabled}.");
-            harmony.Unpatch(typeof(UnitObjectPlayer).GetMethod(nameof(UnitObjectAbility.AddDamageRange)),
+            HarmonyInstance.Unpatch(typeof(UnitObjectPlayer).GetMethod(nameof(UnitObjectAbility.AddDamageRange)),
                 typeof(ParryCheckOldPosPatch).GetMethod(nameof(Transpiler)));
-            harmony.PatchAll(typeof(ParryCheckOldPosPatch));
+            HarmonyInstance.PatchAll(typeof(ParryCheckOldPosPatch));
         };
         Logger.LogInfo("ParryCheckOldPosPatch done.");
     }

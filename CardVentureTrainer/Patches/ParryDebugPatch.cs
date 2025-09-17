@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using HarmonyLib;
 using UnityEngine;
+using static CardVentureTrainer.Plugin;
 
 namespace CardVentureTrainer.Patches;
 
@@ -46,8 +47,8 @@ public static class ParryDebugPatch {
         Plugin.Logger.LogMessage($"Can't dodge because: {cantDodgeReasons.Join()}");
     }
 
-    public static void InitPatch(Plugin plugin, Harmony harmony) {
-        harmony.PatchAll(typeof(ParryDebugPatch));
+    public static void InitPatch() {
+        HarmonyInstance.PatchAll(typeof(ParryDebugPatch));
         Plugin.Logger.LogInfo("ParryDebugPatch done.");
     }
 }

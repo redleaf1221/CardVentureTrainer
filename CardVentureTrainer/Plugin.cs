@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using BepInEx;
+using BepInEx.Configuration;
 using BepInEx.Logging;
 using BepInEx.Unity.Mono;
 using CardVentureTrainer.Patches;
@@ -12,29 +13,32 @@ namespace CardVentureTrainer;
 public class Plugin : BaseUnityPlugin {
     public new static ManualLogSource Logger;
 
-    private static Harmony _harmonyInstance;
+    public new static ConfigFile Config;
+
+    public static Harmony HarmonyInstance;
 
 
     private void Awake() {
         Logger = base.Logger;
+        Config = base.Config;
 
-        _harmonyInstance = new Harmony(MyPluginInfo.PLUGIN_GUID);
+        HarmonyInstance = new Harmony(MyPluginInfo.PLUGIN_GUID);
 
         InitPatches();
 
         Logger.LogMessage($"Plugin {MyPluginInfo.PLUGIN_GUID} loaded!");
     }
 
-    private void InitPatches() {
-        TestVersionPatch.InitPatch(this, _harmonyInstance);
-        SpiderParryEnhancePatch.InitPatch(this, _harmonyInstance);
-        SealDataOverridePatch.InitPatch(this, _harmonyInstance);
-        HadoukenRandomDamagePatch.InitPatch(this, _harmonyInstance);
-        SafeIntPatch.InitPatch(this, _harmonyInstance);
-        ParrySidePatch.InitPatch(this, _harmonyInstance);
-        ParryCheckOldPosPatch.InitPatch(this, _harmonyInstance);
-        FriendUnitLimitPatch.InitPatch(this, _harmonyInstance);
-        ParryDebugPatch.InitPatch(this, _harmonyInstance);
-        ResetOldPosDelayPatch.InitPatch(this, _harmonyInstance);
+    private static void InitPatches() {
+        TestVersionPatch.InitPatch();
+        SpiderParryEnhancePatch.InitPatch();
+        SealDataOverridePatch.InitPatch();
+        HadoukenRandomDamagePatch.InitPatch();
+        SafeIntPatch.InitPatch();
+        ParrySidePatch.InitPatch();
+        ParryCheckOldPosPatch.InitPatch();
+        FriendUnitLimitPatch.InitPatch();
+        ParryDebugPatch.InitPatch();
+        ResetOldPosDelayPatch.InitPatch();
     }
 }
