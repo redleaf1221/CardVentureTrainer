@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Reflection;
 using System.Reflection.Emit;
 using BepInEx.Configuration;
 using HarmonyLib;
@@ -31,8 +32,10 @@ public static class ResetOldPosDelayPatch {
         HarmonyInstance.PatchAll(typeof(ResetOldPosDelayPatch));
         _configDelay.SettingChanged += (sender, args) => {
             Logger.LogInfo($"ResetOldPosDelay changed to {Delay}.");
-            HarmonyInstance.Unpatch(AccessTools.EnumeratorMoveNext(typeof(UnitObjectPlayer).GetMethod(nameof(UnitObjectPlayer.ResetDodgeAfterDelay))),
-                typeof(ResetOldPosDelayPatch).GetMethod(nameof(Transpiler)));
+            HarmonyInstance.Unpatch(AccessTools.EnumeratorMoveNext(typeof(UnitObjectPlayer).GetMethod(nameof(UnitObjectPlayer.ResetDodgeAfterDelay),
+                    BindingFlags.NonPublic | BindingFlags.Instance)),
+                typeof(ResetOldPosDelayPatch).GetMethod(nameof(Transpiler),
+                    BindingFlags.NonPublic | BindingFlags.Static));
             HarmonyInstance.PatchAll(typeof(ResetOldPosDelayPatch));
         };
         Logger.LogInfo("ResetOldPosDelayPatch done.");

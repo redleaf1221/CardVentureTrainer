@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
+﻿using System.Diagnostics.CodeAnalysis;
 using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
@@ -37,7 +35,7 @@ public class Plugin : BaseUnityPlugin {
     private static void InitPatches() {
         TestVersionPatch.InitPatch();
         SpiderParryEnhancePatch.InitPatch();
-        SealDataOverridePatch.InitPatch();
+        SchoolDataOverridePatch.InitPatch();
         HadoukenRandomDamagePatch.InitPatch();
         SafeIntPatch.InitPatch();
         ParrySidePatch.InitPatch();

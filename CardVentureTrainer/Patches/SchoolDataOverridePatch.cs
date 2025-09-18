@@ -7,7 +7,7 @@ using static CardVentureTrainer.Plugin;
 namespace CardVentureTrainer.Patches;
 
 [HarmonyPatch(typeof(BattleObject), nameof(BattleObject.InitAbilityPool))]
-public static class SealDataOverridePatch {
+public static class SchoolDataOverridePatch {
     private static ConfigEntry<string> _configSchoolData;
 
     private static List<int> _patchSchoolData = [];
@@ -31,17 +31,17 @@ public static class SealDataOverridePatch {
     }
 
     public static void InitPatch() {
-        _configSchoolData = Config.Bind("General", "SealDataOverride",
-            "", "Override ability pools to choose from.\nLeave empty to disable.\nSample: 1200/1201/1299\n(1200:Bomb, 1201:Bat, 1202:Lightning,\n 1203:Spawn, 1204:Burn, 1205:Shuriken,\n 1206:Prop, 1207:Cannon, 1208:Invincible, 1299:Events)");
+        _configSchoolData = Config.Bind("General", "SchoolDataOverride",
+            "", "Override ability pools to choose from.\nLeave empty to disable.");
         if (!_parseSchoolData(_configSchoolData.Value, out List<int> result)) _configSchoolData.Value = "";
         _patchSchoolData = result;
 
-        HarmonyInstance.PatchAll(typeof(SealDataOverridePatch));
+        HarmonyInstance.PatchAll(typeof(SchoolDataOverridePatch));
         _configSchoolData.SettingChanged += (sender, args) => {
-            Logger.LogInfo($"SealDataList changed to {_configSchoolData.Value}.");
+            Logger.LogInfo($"SchoolDataOverride changed to {_configSchoolData.Value}.");
             _parseSchoolData(_configSchoolData.Value, out _patchSchoolData);
         };
-        Logger.LogInfo("SealDataOverridePatch done.");
+        Logger.LogInfo("SchoolDataOverridePatch done.");
     }
 
     public static bool TrySetSchoolData(string schoolData) {

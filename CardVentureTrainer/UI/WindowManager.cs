@@ -9,21 +9,25 @@ public class WindowManager : MonoBehaviour {
 
     private static ConfigEntry<KeyboardShortcut> _configShowMainWindowHotkey;
 
-    private static MainWindow _mainWindow;
+    public static MainWindow MainWindow;
+
+    public static SchoolDataWindow SchoolDataWindow;
 
     public void Awake() {
         _configShowMainWindowHotkey = Config.Bind("Hotkeys", "ShowMainWindowHotkey",
             new KeyboardShortcut(KeyCode.F12), "Hotkey of main window");
-        _mainWindow = new MainWindow();
+        MainWindow = new MainWindow();
+        SchoolDataWindow = new SchoolDataWindow();
     }
 
     public void Update() {
         if (_configShowMainWindowHotkey.Value.IsDown()) {
-            _mainWindow.ToggleDisplay();
+            MainWindow.ToggleDisplay();
         }
     }
 
     public void OnGUI() {
-        _mainWindow.Draw();
+        MainWindow.Draw();
+        SchoolDataWindow.Draw();
     }
 }
