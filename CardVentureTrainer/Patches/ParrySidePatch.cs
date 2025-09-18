@@ -27,6 +27,7 @@ public static class ParrySidePatch {
         HarmonyInstance.PatchAll(typeof(ParrySidePatch));
         _configEnabled.SettingChanged += (sender, args) => {
             Logger.LogInfo($"EnableParrySide changed to {Enabled}.");
+            BattleObject.Instance.canParrySide = Enabled;
         };
         Logger.LogInfo("ParrySidePatch done.");
     }
