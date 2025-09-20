@@ -1,5 +1,7 @@
 using System.Globalization;
 using CardVentureTrainer.Patches;
+using CardVentureTrainer.Utils;
+using static CardVentureTrainer.Plugin;
 using UnityEngine;
 
 namespace CardVentureTrainer.UI;
@@ -69,6 +71,9 @@ public class MainWindow {
                     if (GUILayout.Button("DisableCoinSoulRoom", GUILayout.Width(320))) {
                         CoinSoulRoomPatch.Enabled = !CoinSoulRoomPatch.Enabled;
                     }
+                }
+                if (GUILayout.Button("HighlightTest", GUILayout.Width(320))) {
+                    HighlightManager.HighlightLattice(BattleObject.Instance.playerObject.unitPos, new Color(1,0,0,0.5f), 3f);
                 }
             }
             using (new GUILayout.HorizontalScope(GUILayout.ExpandWidth(true))) {

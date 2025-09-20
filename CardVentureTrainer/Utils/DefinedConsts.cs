@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-namespace CardVentureTrainer;
+namespace CardVentureTrainer.Utils;
 
-public static class Utils {
+public static class DefinedConsts {
     public static readonly Dictionary<int, string> SchoolDataNames = new() {
         {
             1200, "Bomb"

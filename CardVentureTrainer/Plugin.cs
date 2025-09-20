@@ -44,5 +44,6 @@ public class Plugin : BaseUnityPlugin {
         ParryDebugPatch.InitPatch();
         ResetOldPosDelayPatch.InitPatch();
         CoinSoulRoomPatch.InitPatch();
+        HighlightPatch.InitPatch();
     }
 }
