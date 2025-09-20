@@ -65,6 +65,13 @@ public class MainWindow {
                 }
             }
             using (new GUILayout.HorizontalScope(GUILayout.ExpandWidth(true))) {
+                using (new GUI.ColorScope(CoinSoulRoomPatch.Enabled ? Color.green : GUI.color)) {
+                    if (GUILayout.Button("DisableCoinSoulRoom", GUILayout.Width(320))) {
+                        CoinSoulRoomPatch.Enabled = !CoinSoulRoomPatch.Enabled;
+                    }
+                }
+            }
+            using (new GUILayout.HorizontalScope(GUILayout.ExpandWidth(true))) {
                 using (new GUI.ColorScope(!Mathf.Approximately(ResetOldPosDelayPatch.Delay, 0.1f) ? Color.green : GUI.color)) {
                     GUILayout.Label("ResetOldPosDelay", GUILayout.Width(120));
                 }

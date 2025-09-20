@@ -43,5 +43,6 @@ public class Plugin : BaseUnityPlugin {
         FriendUnitLimitPatch.InitPatch();
         ParryDebugPatch.InitPatch();
         ResetOldPosDelayPatch.InitPatch();
+        CoinSoulRoomPatch.InitPatch();
     }
 }
