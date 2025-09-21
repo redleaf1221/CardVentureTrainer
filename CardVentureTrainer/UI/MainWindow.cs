@@ -81,7 +81,7 @@ public class MainWindow {
                     }
                 }
                 if (GUILayout.Button("HighlightTest", GUILayout.Width(320))) {
-                    HighlightFeature.HighlightLattice(BattleObject.Instance.playerObject.unitPos, new Color(1, 0, 0, 0.5f), 3f);
+                    HighlightFeature.HighlightLattice(BattleObject.Instance.playerObject.unitPos, new Color(1, 0, 0, 0.5f));
                 }
             }
             using (new GUILayout.HorizontalScope(GUILayout.ExpandWidth(true))) {

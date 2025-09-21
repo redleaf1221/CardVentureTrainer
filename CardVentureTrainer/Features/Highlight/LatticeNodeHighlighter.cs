@@ -23,20 +23,20 @@ public class LatticeNodeHighlighter : MonoBehaviour {
         highlightObj.SetActive(true);
 
         _latticeNode = GetComponentInParent<LatticeNode>();
+        LatticeNodeHighlighterCache.RegisterHighlighter(_latticeNode, this);
     }
 
     private void OnEnable() {
-        LatticeNodeHighlighterCache.RegisterHighlighter(_latticeNode, this);
         HideHighlight();
     }
 
     private void OnDisable() {
-        LatticeNodeHighlighterCache.UnregisterHighlighter(_latticeNode);
         HideHighlight();
     }
 
 
     private void OnDestroy() {
+        LatticeNodeHighlighterCache.UnregisterHighlighter(_latticeNode);
         if (_highlightRenderer && _highlightRenderer.gameObject) {
             Destroy(_highlightRenderer.gameObject);
         }

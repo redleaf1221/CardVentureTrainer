@@ -23,6 +23,13 @@ public static class LatticeNodeHighlighterCache {
         return null;
     }
 
+    public static void HideHighlightForAllNodes() {
+        foreach (WeakReference<LatticeNodeHighlighter> reference in NodeHighlighterCache.Values) {
+            if (!reference.TryGetTarget(out LatticeNodeHighlighter highlighter)) return;
+            highlighter.HideHighlight();
+        }
+    }
+
     public static void ClearCache() {
         NodeHighlighterCache.Clear();
     }
