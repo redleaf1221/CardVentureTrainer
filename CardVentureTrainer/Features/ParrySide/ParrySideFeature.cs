@@ -1,11 +1,9 @@
 using BepInEx.Configuration;
-using HarmonyLib;
 using static CardVentureTrainer.Plugin;
 
-namespace CardVentureTrainer.Patches;
+namespace CardVentureTrainer.Features.ParrySide;
 
-[HarmonyPatch(typeof(BattleObject), nameof(BattleObject.SkillRefresh))]
-public static class ParrySidePatch {
+public static class ParrySideFeature {
     private static ConfigEntry<bool> _configEnabled;
 
     public static bool Enabled {
@@ -13,14 +11,7 @@ public static class ParrySidePatch {
         set => _configEnabled.Value = value;
     }
 
-    // ReSharper disable once InconsistentNaming
-    private static void Postfix(BattleObject __instance) {
-        if (Enabled) {
-            __instance.canParrySide = true;
-        }
-    }
-
-    public static void InitPatch() {
+    public static void Init() {
         _configEnabled = Config.Bind("Trainer", "EnableParrySide",
             false, "Allow parrying from sides.");
 
@@ -29,6 +20,6 @@ public static class ParrySidePatch {
             Logger.LogInfo($"EnableParrySide changed to {Enabled}.");
             BattleObject.Instance.canParrySide = Enabled;
         };
-        Logger.LogInfo("ParrySidePatch done.");
+        Logger.LogInfo("ParrySideFeature loaded.");
     }
 }

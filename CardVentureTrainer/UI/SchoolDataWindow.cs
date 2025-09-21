@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using CardVentureTrainer.Patches;
+using CardVentureTrainer.Features.SchoolDataOverride;
 using CardVentureTrainer.Utils;
 using UnityEngine;
 
@@ -8,7 +8,7 @@ namespace CardVentureTrainer.UI;
 
 public class SchoolDataWindow {
     private static readonly Dictionary<int, bool> SchoolDataDictionary = DefinedConsts.SchoolDataNames.Keys
-        .ToDictionary(id => id, id => SchoolDataOverridePatch.SchoolData.Contains(id));
+        .ToDictionary(id => id, id => SchoolDataOverrideFeature.SchoolData.Contains(id));
 
     private Rect _windowRect = new(200, 100, 100, 200);
 
@@ -35,6 +35,6 @@ public class SchoolDataWindow {
             .Where(kv => kv.Value)
             .Select(kv => kv.Key.ToString())
             .ToArray();
-        SchoolDataOverridePatch.TrySetSchoolData(string.Join("/", selectedIds));
+        SchoolDataOverrideFeature.TrySetSchoolData(string.Join("/", selectedIds));
     }
 }

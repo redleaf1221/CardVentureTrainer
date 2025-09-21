@@ -1,14 +1,22 @@
 using System.Globalization;
-using CardVentureTrainer.Patches;
-using CardVentureTrainer.Utils;
-using static CardVentureTrainer.Plugin;
+using CardVentureTrainer.Features;
+using CardVentureTrainer.Features.CoinSoulRoom;
+using CardVentureTrainer.Features.FriendUnitLimit;
+using CardVentureTrainer.Features.HdkNegDamage;
+using CardVentureTrainer.Features.Highlight;
+using CardVentureTrainer.Features.ParryCheckOldPos;
+using CardVentureTrainer.Features.ParrySide;
+using CardVentureTrainer.Features.ResetOldPosDelay;
+using CardVentureTrainer.Features.SchoolDataOverride;
+using CardVentureTrainer.Features.SpiderParryEnhance;
+using CardVentureTrainer.Features.TestVersion;
 using UnityEngine;
 
 namespace CardVentureTrainer.UI;
 
 public class MainWindow {
 
-    private static string _resetOldPosDelayString = ResetOldPosDelayPatch.Delay.ToString(CultureInfo.InvariantCulture);
+    private static string _resetOldPosDelayString = ResetOldPosDelayFeature.Delay.ToString(CultureInfo.InvariantCulture);
 
     private static bool _resetOldPosDelaySetSucceed = true;
     private Rect _windowRect = new(100, 100, 640, 150);
@@ -31,53 +39,53 @@ public class MainWindow {
         using (new GUILayout.VerticalScope()) {
             GUILayout.Label("Welcome to the CardVentureTrainer!");
             using (new GUILayout.HorizontalScope(GUILayout.ExpandWidth(true))) {
-                using (new GUI.ColorScope(TestVersionPatch.Enabled ? Color.green : GUI.color)) {
+                using (new GUI.ColorScope(TestVersionFeature.Enabled ? Color.green : GUI.color)) {
                     if (GUILayout.Button("TestVersion", GUILayout.Width(320))) {
-                        TestVersionPatch.Enabled = !TestVersionPatch.Enabled;
+                        TestVersionFeature.Enabled = !TestVersionFeature.Enabled;
                     }
                 }
-                using (new GUI.ColorScope(SpiderParryEnhancePatch.Enabled ? Color.green : GUI.color)) {
+                using (new GUI.ColorScope(SpiderParryEnhanceFeature.Enabled ? Color.green : GUI.color)) {
                     if (GUILayout.Button("SpiderParryEnhance", GUILayout.Width(320))) {
-                        SpiderParryEnhancePatch.Enabled = !SpiderParryEnhancePatch.Enabled;
+                        SpiderParryEnhanceFeature.Enabled = !SpiderParryEnhanceFeature.Enabled;
                     }
                 }
             }
             using (new GUILayout.HorizontalScope(GUILayout.ExpandWidth(true))) {
-                using (new GUI.ColorScope(HadoukenRandomDamagePatch.Enabled ? Color.green : GUI.color)) {
+                using (new GUI.ColorScope(HdkNegDamageFeature.Enabled ? Color.green : GUI.color)) {
                     if (GUILayout.Button("DisableHadoukenNegDamage", GUILayout.Width(320))) {
-                        HadoukenRandomDamagePatch.Enabled = !HadoukenRandomDamagePatch.Enabled;
+                        HdkNegDamageFeature.Enabled = !HdkNegDamageFeature.Enabled;
                     }
                 }
-                using (new GUI.ColorScope(ParrySidePatch.Enabled ? Color.green : GUI.color)) {
+                using (new GUI.ColorScope(ParrySideFeature.Enabled ? Color.green : GUI.color)) {
                     if (GUILayout.Button("ParrySide", GUILayout.Width(320))) {
-                        ParrySidePatch.Enabled = !ParrySidePatch.Enabled;
+                        ParrySideFeature.Enabled = !ParrySideFeature.Enabled;
                     }
                 }
             }
             using (new GUILayout.HorizontalScope(GUILayout.ExpandWidth(true))) {
-                using (new GUI.ColorScope(ParryCheckOldPosPatch.Enabled ? Color.green : GUI.color)) {
+                using (new GUI.ColorScope(ParryCheckOldPosFeature.Enabled ? Color.green : GUI.color)) {
                     if (GUILayout.Button("DisableParryOldPosCheck", GUILayout.Width(320))) {
-                        ParryCheckOldPosPatch.Enabled = !ParryCheckOldPosPatch.Enabled;
+                        ParryCheckOldPosFeature.Enabled = !ParryCheckOldPosFeature.Enabled;
                     }
                 }
-                using (new GUI.ColorScope(FriendUnitLimitPatch.Enabled ? Color.green : GUI.color)) {
+                using (new GUI.ColorScope(FriendUnitLimitFeature.Enabled ? Color.green : GUI.color)) {
                     if (GUILayout.Button("DisableFriendUnitLimit", GUILayout.Width(320))) {
-                        FriendUnitLimitPatch.Enabled = !FriendUnitLimitPatch.Enabled;
+                        FriendUnitLimitFeature.Enabled = !FriendUnitLimitFeature.Enabled;
                     }
                 }
             }
             using (new GUILayout.HorizontalScope(GUILayout.ExpandWidth(true))) {
-                using (new GUI.ColorScope(CoinSoulRoomPatch.Enabled ? Color.green : GUI.color)) {
+                using (new GUI.ColorScope(CoinSoulRoomFeature.Enabled ? Color.green : GUI.color)) {
                     if (GUILayout.Button("DisableCoinSoulRoom", GUILayout.Width(320))) {
-                        CoinSoulRoomPatch.Enabled = !CoinSoulRoomPatch.Enabled;
+                        CoinSoulRoomFeature.Enabled = !CoinSoulRoomFeature.Enabled;
                     }
                 }
                 if (GUILayout.Button("HighlightTest", GUILayout.Width(320))) {
-                    HighlightManager.HighlightLattice(BattleObject.Instance.playerObject.unitPos, new Color(1,0,0,0.5f), 3f);
+                    HighlightFeature.HighlightLattice(BattleObject.Instance.playerObject.unitPos, new Color(1, 0, 0, 0.5f), 3f);
                 }
             }
             using (new GUILayout.HorizontalScope(GUILayout.ExpandWidth(true))) {
-                using (new GUI.ColorScope(!Mathf.Approximately(ResetOldPosDelayPatch.Delay, 0.1f) ? Color.green : GUI.color)) {
+                using (new GUI.ColorScope(!Mathf.Approximately(ResetOldPosDelayFeature.Delay, 0.1f) ? Color.green : GUI.color)) {
                     GUILayout.Label("ResetOldPosDelay", GUILayout.Width(120));
                 }
                 var newVal = GUILayout.TextField(_resetOldPosDelayString, GUILayout.Width(180));
@@ -86,7 +94,7 @@ public class MainWindow {
                     var succeed = float.TryParse(newVal, out var result);
                     _resetOldPosDelaySetSucceed = succeed;
                     if (succeed) {
-                        var succeed2 = ResetOldPosDelayPatch.TrySetDelay(result);
+                        var succeed2 = ResetOldPosDelayFeature.TrySetDelay(result);
                         _resetOldPosDelaySetSucceed = succeed2;
                     }
                 }
@@ -94,7 +102,7 @@ public class MainWindow {
                     GUILayout.Label("S", GUILayout.Width(10));
                 }
 
-                using (new GUI.ColorScope(SchoolDataOverridePatch.SchoolData.Count > 0 ? Color.green : GUI.color)) {
+                using (new GUI.ColorScope(SchoolDataOverrideFeature.SchoolData.Count > 0 ? Color.green : GUI.color)) {
                     if (GUILayout.Button("SchoolDataOverride", GUILayout.Width(320))) {
                         WindowManager.SchoolDataWindow.ToggleDisplay();
                     }

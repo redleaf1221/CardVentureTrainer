@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace CardVentureTrainer.Utils;
+namespace CardVentureTrainer.Features.Highlight;
 
 public static class LatticeNodeHighlighterCache {
     private static readonly Dictionary<LatticeNode, WeakReference<LatticeNodeHighlighter>> NodeHighlighterCache = new();

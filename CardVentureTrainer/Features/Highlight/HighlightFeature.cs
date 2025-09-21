@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static CardVentureTrainer.Plugin;
 
-namespace CardVentureTrainer.Utils;
+namespace CardVentureTrainer.Features.Highlight;
 
-public static class HighlightManager {
+public static class HighlightFeature {
 
     private static LatticeNodeHighlighter GetLatticeHighlighter(Vector2Int position) {
         LatticeObject latticeObject = SingletonData<LatticeObject>.Instance;
@@ -37,5 +38,10 @@ public static class HighlightManager {
         foreach (Vector2Int pos in positions) {
             UnhighlightLattice(pos);
         }
+    }
+
+    public static void Init() {
+        HarmonyInstance.PatchAll(typeof(HighlightPatch));
+        Plugin.Logger.LogInfo("HighlightFeature loaded.");
     }
 }

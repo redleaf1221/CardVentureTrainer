@@ -1,14 +1,14 @@
 using System.Collections.Generic;
+using CardVentureTrainer.Features.ParryCheckOldPos;
 using HarmonyLib;
 using UnityEngine;
-using static CardVentureTrainer.Plugin;
 
-namespace CardVentureTrainer.Patches;
+namespace CardVentureTrainer.Features.ParryDebug;
 
 [HarmonyPatch(typeof(UnitObjectAbility), nameof(UnitObjectAbility.AddDamageRange))]
 public static class ParryDebugPatch {
     // ReSharper disable once InconsistentNaming
-    private static void Postfix(ref UnitObjectAbility __instance, List<Vector2Int> targetPos, ref List<UnitObject> unithit, int damage) {
+    public static void Postfix(ref UnitObjectAbility __instance, List<Vector2Int> targetPos, ref List<UnitObject> unithit, int damage) {
         if (!unithit.Contains(SingletonData<BattleObject>.Instance.playerObject)) {
             return;
         }
@@ -19,7 +19,7 @@ public static class ParryDebugPatch {
         foreach (Vector2Int vector2Int3 in targetPos) {
             if (SingletonData<BattleObject>.Instance.playerObject.oldPos == vector2Int3) {
                 flag = true;
-                if (ParryCheckOldPosPatch.Enabled) flag2 = false;
+                if (ParryCheckOldPosFeature.Enabled) flag2 = false;
             }
             if (SingletonData<BattleObject>.Instance.playerObject.unitPos == vector2Int3) {
                 flag3 = true;
@@ -45,10 +45,5 @@ public static class ParryDebugPatch {
         if (!flag) cantDodgeReasons.Add("player oldPos not in targetPos");
         Plugin.Logger.LogMessage($"Can't parry because: {cantParryReasons.Join()}");
         Plugin.Logger.LogMessage($"Can't dodge because: {cantDodgeReasons.Join()}");
-    }
-
-    public static void InitPatch() {
-        HarmonyInstance.PatchAll(typeof(ParryDebugPatch));
-        Plugin.Logger.LogInfo("ParryDebugPatch done.");
     }
 }

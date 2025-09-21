@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace CardVentureTrainer.Utils;
+namespace CardVentureTrainer.Features.Highlight;
 
 public class LatticeNodeHighlighter : MonoBehaviour {
     private SpriteRenderer _highlightRenderer;
@@ -27,12 +27,12 @@ public class LatticeNodeHighlighter : MonoBehaviour {
 
     private void OnEnable() {
         LatticeNodeHighlighterCache.RegisterHighlighter(_latticeNode, this);
-        //HideHighlight();
+        HideHighlight();
     }
 
     private void OnDisable() {
         LatticeNodeHighlighterCache.UnregisterHighlighter(_latticeNode);
-        //HideHighlight();
+        HideHighlight();
     }
 
 

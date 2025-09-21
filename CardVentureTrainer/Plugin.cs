@@ -3,7 +3,7 @@ using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
 using BepInEx.Unity.Mono;
-using CardVentureTrainer.Patches;
+using CardVentureTrainer.Features;
 using CardVentureTrainer.UI;
 using HarmonyLib;
 
@@ -18,32 +18,16 @@ public class Plugin : BaseUnityPlugin {
 
     public static Harmony HarmonyInstance;
 
-
     private void Awake() {
         Logger = base.Logger;
         Config = base.Config;
 
         HarmonyInstance = new Harmony(MyPluginInfo.PLUGIN_GUID);
 
-        InitPatches();
+        FeatureManager.InitFeatures();
 
         gameObject.AddComponent<WindowManager>();
 
         Logger.LogMessage($"Plugin {MyPluginInfo.PLUGIN_GUID} loaded!");
-    }
-
-    private static void InitPatches() {
-        TestVersionPatch.InitPatch();
-        SpiderParryEnhancePatch.InitPatch();
-        SchoolDataOverridePatch.InitPatch();
-        HadoukenRandomDamagePatch.InitPatch();
-        SafeIntPatch.InitPatch();
-        ParrySidePatch.InitPatch();
-        ParryCheckOldPosPatch.InitPatch();
-        FriendUnitLimitPatch.InitPatch();
-        ParryDebugPatch.InitPatch();
-        ResetOldPosDelayPatch.InitPatch();
-        CoinSoulRoomPatch.InitPatch();
-        HighlightPatch.InitPatch();
     }
 }

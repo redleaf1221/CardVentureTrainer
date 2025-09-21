@@ -1,8 +1,6 @@
-using CardVentureTrainer.Utils;
 using HarmonyLib;
-using static CardVentureTrainer.Plugin;
 
-namespace CardVentureTrainer.Patches;
+namespace CardVentureTrainer.Features.Highlight;
 
 [HarmonyPatch]
 public static class HighlightPatch {
@@ -19,10 +17,5 @@ public static class HighlightPatch {
     private static bool Prefix(LatticeObject __instance) {
         LatticeNodeHighlighterCache.ClearCache();
         return true;
-    }
-
-    public static void InitPatch() {
-        HarmonyInstance.PatchAll(typeof(HighlightPatch));
-        Logger.LogInfo("HighlightPatch done.");
     }
 }
