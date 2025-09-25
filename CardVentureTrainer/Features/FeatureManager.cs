@@ -1,4 +1,5 @@
 using CardVentureTrainer.Features.CoinSoulRoom;
+using CardVentureTrainer.Features.ErrorReport;
 using CardVentureTrainer.Features.FriendUnitLimit;
 using CardVentureTrainer.Features.HdkNegDamage;
 using CardVentureTrainer.Features.Highlight;
@@ -15,6 +16,7 @@ namespace CardVentureTrainer.Features;
 
 public static class FeatureManager {
     public static void InitFeatures() {
+        ErrorReportFeature.Init();
         TestVersionFeature.Init();
         SpiderParryEnhanceFeature.Init();
         SchoolDataOverrideFeature.Init();
