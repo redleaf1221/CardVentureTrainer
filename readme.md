@@ -13,7 +13,7 @@ This is a simple mod using **BepInEx 6** to modify the game **CardVenture:JustAH
 * Disable friend unit spawn limit.
 * Reduce animation time to make parrying spiders easier.
 * Show oldPos and unitPos of the player.
-* Show possible targets of the demon sword
+* Show possible targets of the demon sword.
 
 ## How to use
 
