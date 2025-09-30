@@ -34,10 +34,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Features\ShowOldPos\"/>
-    </ItemGroup>
-
-    <ItemGroup>
         <Compile Remove="Highlight\**"/>
     </ItemGroup>
 

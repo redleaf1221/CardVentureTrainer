@@ -9,6 +9,7 @@ using CardVentureTrainer.Features.ParrySide;
 using CardVentureTrainer.Features.ResetOldPosDelay;
 using CardVentureTrainer.Features.SafeInt;
 using CardVentureTrainer.Features.SchoolDataOverride;
+using CardVentureTrainer.Features.ShowOldPos;
 using CardVentureTrainer.Features.SpiderParryEnhance;
 using CardVentureTrainer.Features.TestVersion;
 
@@ -29,5 +30,6 @@ public static class FeatureManager {
         ResetOldPosDelayFeature.Init();
         CoinSoulRoomFeature.Init();
         HighlightFeature.Init();
+        ShowOldPosFeature.Init();
     }
 }

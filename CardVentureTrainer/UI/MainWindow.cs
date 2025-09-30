@@ -8,6 +8,7 @@ using CardVentureTrainer.Features.ParryCheckOldPos;
 using CardVentureTrainer.Features.ParrySide;
 using CardVentureTrainer.Features.ResetOldPosDelay;
 using CardVentureTrainer.Features.SchoolDataOverride;
+using CardVentureTrainer.Features.ShowOldPos;
 using CardVentureTrainer.Features.SpiderParryEnhance;
 using CardVentureTrainer.Features.TestVersion;
 using UnityEngine;
@@ -80,8 +81,10 @@ public class MainWindow {
                         CoinSoulRoomFeature.Enabled = !CoinSoulRoomFeature.Enabled;
                     }
                 }
-                if (GUILayout.Button("HighlightTest", GUILayout.Width(320))) {
-                    HighlightFeature.HighlightLattice(BattleObject.Instance.playerObject.unitPos, new Color(1, 0, 0, 0.5f));
+                using (new GUI.ColorScope(ShowOldPosFeature.Enabled ? Color.green : GUI.color)) {
+                    if (GUILayout.Button("ShowOldPos", GUILayout.Width(320))) {
+                        ShowOldPosFeature.Enabled = !ShowOldPosFeature.Enabled;
+                    }
                 }
             }
             using (new GUILayout.HorizontalScope(GUILayout.ExpandWidth(true))) {
