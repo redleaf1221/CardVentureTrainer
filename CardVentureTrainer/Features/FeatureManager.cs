@@ -1,4 +1,5 @@
 using CardVentureTrainer.Features.CoinSoulRoom;
+using CardVentureTrainer.Features.DemonSwordTarget;
 using CardVentureTrainer.Features.ErrorReport;
 using CardVentureTrainer.Features.FriendUnitLimit;
 using CardVentureTrainer.Features.HdkNegDamage;
@@ -31,5 +32,6 @@ public static class FeatureManager {
         CoinSoulRoomFeature.Init();
         HighlightFeature.Init();
         ShowOldPosFeature.Init();
+        DemonSwordTargetFeature.Init();
     }
 }

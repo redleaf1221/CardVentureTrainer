@@ -1,4 +1,6 @@
 using BepInEx.Configuration;
+using CardVentureTrainer.Features.Highlight;
+using UnityEngine;
 using static CardVentureTrainer.Plugin;
 
 namespace CardVentureTrainer.Features.ShowOldPos;
@@ -17,8 +19,12 @@ public static class ShowOldPosFeature {
         
         HarmonyInstance.PatchAll(typeof(ShowOldPosPatch));
         _configEnabled.SettingChanged += (sender, args) => {
-            Logger.LogInfo($"ShowOldPos changed to {Enabled}.");
+            Plugin.Logger.LogInfo($"ShowOldPos changed to {Enabled}.");
+            HighlightFeature.UnhighlightLattice(ShowOldPosPatch.HighlightPlayerPos);
+            ShowOldPosPatch.HighlightPlayerPos = Vector2Int.zero;
+            HighlightFeature.UnhighlightLattice(ShowOldPosPatch.HighlightPlayerOldPos);
+            ShowOldPosPatch.HighlightPlayerOldPos = Vector2Int.zero;
         };
-        Logger.LogInfo("ShowOldPosFeature loaded.");
+        Plugin.Logger.LogInfo("ShowOldPosFeature loaded.");
     }
 }

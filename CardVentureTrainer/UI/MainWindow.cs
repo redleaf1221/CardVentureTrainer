@@ -1,9 +1,8 @@
 using System.Globalization;
-using CardVentureTrainer.Features;
 using CardVentureTrainer.Features.CoinSoulRoom;
+using CardVentureTrainer.Features.DemonSwordTarget;
 using CardVentureTrainer.Features.FriendUnitLimit;
 using CardVentureTrainer.Features.HdkNegDamage;
-using CardVentureTrainer.Features.Highlight;
 using CardVentureTrainer.Features.ParryCheckOldPos;
 using CardVentureTrainer.Features.ParrySide;
 using CardVentureTrainer.Features.ResetOldPosDelay;
@@ -84,6 +83,13 @@ public class MainWindow {
                 using (new GUI.ColorScope(ShowOldPosFeature.Enabled ? Color.green : GUI.color)) {
                     if (GUILayout.Button("ShowOldPos", GUILayout.Width(320))) {
                         ShowOldPosFeature.Enabled = !ShowOldPosFeature.Enabled;
+                    }
+                }
+            }
+            using (new GUILayout.HorizontalScope(GUILayout.ExpandWidth(true))) {
+                using (new GUI.ColorScope(DemonSwordTargetFeature.Enabled ? Color.green : GUI.color)) {
+                    if (GUILayout.Button("DemonSwordTarget", GUILayout.Width(320))) {
+                        DemonSwordTargetFeature.Enabled = !DemonSwordTargetFeature.Enabled;
                     }
                 }
             }
