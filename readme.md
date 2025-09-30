@@ -21,7 +21,7 @@ This is a simple mod using **BepInEx 6** to modify the game **CardVenture:JustAH
 2. Download latest [BepInEx 6 Bleeding Edge Build](https://builds.bepinex.dev/projects/bepinex_be) (BepInEx Unity (Mono) for Windows (x64) games)
 3. Unzip and place it in the game folder.
 4. Move `CardVentureTrainer.dll` to `BepInEx\plugins`.
-5. Use F12 to open the in-game GUI, you may change the hotkey in `BepInEx\config\CardVentureTrainer.cfg`
+5. Use F12 to open the in-game GUI, you may change the hotkey in `BepInEx\config\CardVentureTrainer.cfg`.
 6. Enjoy~
 
 ## TODO
