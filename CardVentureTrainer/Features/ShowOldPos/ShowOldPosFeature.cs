@@ -16,7 +16,7 @@ public static class ShowOldPosFeature {
     public static void Init() {
         _configEnabled = Config.Bind("Trainer", "ShowOldPos",
             false, "Show oldPos for parrying.");
-        
+
         HarmonyInstance.PatchAll(typeof(ShowOldPosPatch));
         _configEnabled.SettingChanged += (sender, args) => {
             Plugin.Logger.LogInfo($"ShowOldPos changed to {Enabled}.");

@@ -1,6 +1,4 @@
-using BepInEx.Configuration;
 using HarmonyLib;
-using static CardVentureTrainer.Plugin;
 
 namespace CardVentureTrainer.Features.SpiderParryEnhance;
 
@@ -16,5 +14,4 @@ public static class SpiderParryEnhancePatch {
             __instance.speed *= 2;
         }
     }
-
 }

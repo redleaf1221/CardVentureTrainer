@@ -1,6 +1,4 @@
-﻿using BepInEx.Configuration;
-using HarmonyLib;
-using static CardVentureTrainer.Plugin;
+﻿using HarmonyLib;
 
 namespace CardVentureTrainer.Features.TestVersion;
 

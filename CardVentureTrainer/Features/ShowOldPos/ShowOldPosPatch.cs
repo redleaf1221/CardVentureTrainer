@@ -8,7 +8,7 @@ namespace CardVentureTrainer.Features.ShowOldPos;
 public static class ShowOldPosPatch {
     public static Vector2Int HighlightPlayerOldPos;
     public static Vector2Int HighlightPlayerPos;
-    
+
     [HarmonyPrefix]
     [HarmonyPatch(typeof(UnitObjectPlayer), nameof(UnitObjectPlayer.Update))]
     // ReSharper disable once InconsistentNaming

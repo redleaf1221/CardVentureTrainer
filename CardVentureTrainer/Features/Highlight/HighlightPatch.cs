@@ -18,7 +18,7 @@ public static class HighlightPatch {
         LatticeNodeHighlighterCache.HideHighlightForAllNodes();
         return true;
     }
-    
+
     [HarmonyPrefix]
     [HarmonyPatch(typeof(BattleObject), nameof(BattleObject.runStartLevel))]
     // ReSharper disable once InconsistentNaming
