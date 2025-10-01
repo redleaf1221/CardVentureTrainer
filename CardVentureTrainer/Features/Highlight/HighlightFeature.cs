@@ -8,7 +8,7 @@ public static class HighlightFeature {
 
     private static LatticeNodeHighlighter GetLatticeHighlighter(Vector2Int position) {
         LatticeObject latticeObject = SingletonData<LatticeObject>.Instance;
-        if (latticeObject == null || !latticeObject.CheckInMap(position)) return null;
+        if (latticeObject?.latticeNodes == null || !latticeObject.CheckInMap(position)) return null;
 
         LatticeNode latticeNode = latticeObject.latticeNodes[position.x, position.y];
         return latticeNode ? LatticeNodeHighlighterCache.TryGetNodeHighlighter(latticeNode) : null;
