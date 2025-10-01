@@ -44,4 +44,8 @@
     <ItemGroup>
         <None Remove="Highlight\**"/>
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Resources\Highlight\" />
+    </ItemGroup>
 </Project>

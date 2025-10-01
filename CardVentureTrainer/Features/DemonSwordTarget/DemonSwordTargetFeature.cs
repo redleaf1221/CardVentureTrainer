@@ -7,14 +7,6 @@ using static CardVentureTrainer.Plugin;
 namespace CardVentureTrainer.Features.DemonSwordTarget;
 
 public static class DemonSwordTargetFeature {
-    public static readonly Vector2Int[] Directions = [Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right];
-
-    public static readonly Dictionary<Vector2Int, Color> DirectionColors = new() {
-        { Vector2Int.up, new Color(1, 0, 0, 0.5f) },
-        { Vector2Int.down, new Color(1, 1, 0, 0.5f) },
-        { Vector2Int.left, new Color(0, 0, 1, 0.5f) },
-        { Vector2Int.right, new Color(0, 1, 0, 0.5f) }
-    };
 
     private static ConfigEntry<bool> _configEnabled;
 
@@ -30,7 +22,7 @@ public static class DemonSwordTargetFeature {
         HarmonyInstance.PatchAll(typeof(DemonSwordTargetPatch));
         _configEnabled.SettingChanged += (sender, args) => {
             Plugin.Logger.LogInfo($"DemonSwordTarget changed to {Enabled}.");
-            foreach (Vector2Int direction in Directions) {
+            foreach (Vector2Int direction in DemonSwordTargetHelper.Directions) {
                 HighlightFeature.UnhighlightLattice(DemonSwordTargetPatch.HighlightTargets[direction]);
                 DemonSwordTargetPatch.HighlightTargets[direction] = Vector2Int.zero;
             }
@@ -38,15 +30,4 @@ public static class DemonSwordTargetFeature {
         Plugin.Logger.LogInfo("DemonSwordTargetFeature loaded.");
     }
 
-    public static Vector2Int DemonSwordTargeting(Vector2Int dir, UnitObjectPlayer player) {
-        Vector2Int vector2Int = player.haveEnemyInRange(dir);
-        if (SingletonData<BattleObject>.Instance.currentRoom == RoomType.EVE) vector2Int = default;
-        Vector2Int vector2Int2 = vector2Int - dir;
-        if (SingletonData<BattleObject>.Instance.demonSwordFlashBack) vector2Int2 = vector2Int + dir;
-        if (vector2Int != default && (SingletonData<LatticeObject>.Instance.CheckPosCanMove(vector2Int2) ||
-                                      SingletonData<BattleObject>.Instance.demonSwordMustFlash)) {
-            return vector2Int;
-        }
-        return Vector2Int.zero;
-    }
 }
