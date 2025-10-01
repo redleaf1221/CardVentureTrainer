@@ -23,7 +23,7 @@ public static class DemonSwordTargetFeature {
         _configEnabled.SettingChanged += (sender, args) => {
             Plugin.Logger.LogInfo($"DemonSwordTarget changed to {Enabled}.");
             foreach (Vector2Int direction in DemonSwordTargetHelper.Directions) {
-                HighlightFeature.UnhighlightLattice(DemonSwordTargetPatch.HighlightTargets[direction]);
+                HighlightFeature.Unhighlight(DemonSwordTargetPatch.HighlightTargets[direction]);
                 DemonSwordTargetPatch.HighlightTargets[direction] = Vector2Int.zero;
             }
         };

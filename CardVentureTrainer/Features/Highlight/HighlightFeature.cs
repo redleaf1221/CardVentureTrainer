@@ -14,30 +14,18 @@ public static class HighlightFeature {
         return latticeNode ? LatticeNodeHighlighterCache.TryGetNodeHighlighter(latticeNode) : null;
     }
 
-    public static bool HighlightLattice(Vector2Int position, Color color, float duration = 0f) {
+    public static bool Highlight(Vector2Int position, Color color, float duration = 0f) {
         LatticeNodeHighlighter highlighter = GetLatticeHighlighter(position);
         if (!highlighter) return false;
         highlighter.ShowHighlight(color, duration);
         return true;
     }
 
-    public static void HighlightMultipleLattices(List<Vector2Int> positions, Color color, float duration = 0f) {
-        foreach (Vector2Int pos in positions) {
-            HighlightLattice(pos, color, duration);
-        }
-    }
-
-    public static bool UnhighlightLattice(Vector2Int position) {
+    public static bool Unhighlight(Vector2Int position) {
         LatticeNodeHighlighter highlighter = GetLatticeHighlighter(position);
         if (!highlighter) return false;
         highlighter.HideHighlight();
         return true;
-    }
-
-    public static void UnhighlightMultipleLattices(List<Vector2Int> positions) {
-        foreach (Vector2Int pos in positions) {
-            UnhighlightLattice(pos);
-        }
     }
 
     public static void Init() {

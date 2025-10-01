@@ -22,8 +22,8 @@ public static class DemonSwordTargetPatch {
                 dir => DemonSwordTargetHelper.DemonSwordTargeting(dir, BattleObject.Instance.playerObject));
         foreach (Vector2Int direction in DemonSwordTargetHelper.Directions) {
             if (newTargets[direction] == HighlightTargets[direction]) continue;
-            HighlightFeature.UnhighlightLattice(HighlightTargets[direction]);
-            HighlightFeature.HighlightLattice(newTargets[direction], DemonSwordTargetHelper.DirectionColors[direction]);
+            HighlightFeature.Unhighlight(HighlightTargets[direction]);
+            HighlightFeature.Highlight(newTargets[direction], DemonSwordTargetHelper.DirectionColors[direction]);
             HighlightTargets[direction] = newTargets[direction];
         }
     }

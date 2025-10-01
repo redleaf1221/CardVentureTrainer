@@ -20,9 +20,9 @@ public static class ShowOldPosFeature {
         HarmonyInstance.PatchAll(typeof(ShowOldPosPatch));
         _configEnabled.SettingChanged += (sender, args) => {
             Plugin.Logger.LogInfo($"ShowOldPos changed to {Enabled}.");
-            HighlightFeature.UnhighlightLattice(ShowOldPosPatch.HighlightPlayerPos);
+            HighlightFeature.Unhighlight(ShowOldPosPatch.HighlightPlayerPos);
             ShowOldPosPatch.HighlightPlayerPos = Vector2Int.zero;
-            HighlightFeature.UnhighlightLattice(ShowOldPosPatch.HighlightPlayerOldPos);
+            HighlightFeature.Unhighlight(ShowOldPosPatch.HighlightPlayerOldPos);
             ShowOldPosPatch.HighlightPlayerOldPos = Vector2Int.zero;
         };
         Plugin.Logger.LogInfo("ShowOldPosFeature loaded.");

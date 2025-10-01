@@ -16,13 +16,13 @@ public static class ShowOldPosPatch {
         if (!ShowOldPosFeature.Enabled) return;
         if (HighlightPlayerPos != __instance.unitPos) {
             // This will cancel oldPos highlight so we put this front.
-            HighlightFeature.UnhighlightLattice(HighlightPlayerPos);
-            HighlightFeature.HighlightLattice(__instance.unitPos, new Color(1, 0, 0, 0.5f));
+            HighlightFeature.Unhighlight(HighlightPlayerPos);
+            HighlightFeature.Highlight(__instance.unitPos, new Color(1, 0, 0, 0.5f));
             HighlightPlayerPos = __instance.unitPos;
         }
         if (HighlightPlayerOldPos != __instance.oldPos) {
-            HighlightFeature.UnhighlightLattice(HighlightPlayerOldPos);
-            HighlightFeature.HighlightLattice(__instance.oldPos, new Color(0, 1, 0, 0.5f));
+            HighlightFeature.Unhighlight(HighlightPlayerOldPos);
+            HighlightFeature.Highlight(__instance.oldPos, new Color(0, 1, 0, 0.5f));
             HighlightPlayerOldPos = __instance.oldPos;
         }
     }
