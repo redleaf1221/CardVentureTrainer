@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using CardVentureTrainer.Core;
 using UnityEngine;
 using static CardVentureTrainer.Plugin;
 
@@ -14,18 +14,21 @@ public static class HighlightFeature {
         return latticeNode ? LatticeNodeHighlighterCache.TryGetNodeHighlighter(latticeNode) : null;
     }
 
-    public static bool Highlight(Vector2Int position, Color color, float duration = 0f) {
+    public static void Highlight(Vector2Int position, Color color, Sprite sprite) {
         LatticeNodeHighlighter highlighter = GetLatticeHighlighter(position);
-        if (!highlighter) return false;
-        highlighter.ShowHighlight(color, duration);
-        return true;
+        highlighter.SetColor(color);
+        highlighter.SetSprite(sprite);
     }
 
-    public static bool Unhighlight(Vector2Int position) {
+    public static void Highlight(Vector2Int position, Color color) {
         LatticeNodeHighlighter highlighter = GetLatticeHighlighter(position);
-        if (!highlighter) return false;
-        highlighter.HideHighlight();
-        return true;
+        highlighter.SetColor(color);
+        highlighter.SetSprite(SpriteManager.GetSprite("default"));
+    }
+
+    public static void Unhighlight(Vector2Int position) {
+        LatticeNodeHighlighter highlighter = GetLatticeHighlighter(position);
+        highlighter.ResetHighlight();
     }
 
     public static void Init() {

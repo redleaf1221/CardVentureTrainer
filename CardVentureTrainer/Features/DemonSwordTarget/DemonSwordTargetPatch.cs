@@ -23,7 +23,9 @@ public static class DemonSwordTargetPatch {
         foreach (Vector2Int direction in DemonSwordTargetHelper.Directions) {
             if (newTargets[direction] == HighlightTargets[direction]) continue;
             HighlightFeature.Unhighlight(HighlightTargets[direction]);
-            HighlightFeature.Highlight(newTargets[direction], DemonSwordTargetHelper.DirectionColors[direction]);
+            HighlightFeature.Highlight(newTargets[direction],
+                new Color(1, 1, 1, 0.8f),
+                DemonSwordTargetHelper.DirectionSprite[direction]);
             HighlightTargets[direction] = newTargets[direction];
         }
     }

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using BepInEx.Configuration;
 using CardVentureTrainer.Features.Highlight;
 using UnityEngine;
@@ -29,5 +28,4 @@ public static class DemonSwordTargetFeature {
         };
         Plugin.Logger.LogInfo("DemonSwordTargetFeature loaded.");
     }
-
 }

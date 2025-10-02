@@ -1,9 +1,18 @@
 using System.Collections.Generic;
+using CardVentureTrainer.Core;
 using UnityEngine;
 
 namespace CardVentureTrainer.Features.DemonSwordTarget;
 
 public static class DemonSwordTargetHelper {
+    public static readonly Vector2Int[] Directions = [Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right];
+
+    public static readonly Dictionary<Vector2Int, Sprite> DirectionSprite = new() {
+        { Vector2Int.up, SpriteManager.GetSprite("up") },
+        { Vector2Int.down, SpriteManager.GetSprite("down") },
+        { Vector2Int.left, SpriteManager.GetSprite("left") },
+        { Vector2Int.right, SpriteManager.GetSprite("right") }
+    };
 
     public static Vector2Int DemonSwordTargeting(Vector2Int dir, UnitObjectPlayer player) {
         Vector2Int vector2Int = player.haveEnemyInRange(dir);
@@ -16,12 +25,4 @@ public static class DemonSwordTargetHelper {
         }
         return Vector2Int.zero;
     }
-    public static readonly Vector2Int[] Directions = [Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right];
-
-    public static readonly Dictionary<Vector2Int, Color> DirectionColors = new() {
-        { Vector2Int.up, new Color(1, 0, 0, 0.5f) },
-        { Vector2Int.down, new Color(1, 1, 0, 0.5f) },
-        { Vector2Int.left, new Color(0, 0, 1, 0.5f) },
-        { Vector2Int.right, new Color(0, 1, 0, 0.5f) }
-    };
 }

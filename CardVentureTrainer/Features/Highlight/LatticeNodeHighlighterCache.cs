@@ -26,7 +26,7 @@ public static class LatticeNodeHighlighterCache {
     public static void HideHighlightForAllNodes() {
         foreach (WeakReference<LatticeNodeHighlighter> reference in NodeHighlighterCache.Values) {
             if (!reference.TryGetTarget(out LatticeNodeHighlighter highlighter)) return;
-            highlighter.HideHighlight();
+            highlighter.ResetHighlight();
         }
     }
 

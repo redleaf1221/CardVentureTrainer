@@ -34,18 +34,15 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Remove="Highlight\**"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <EmbeddedResource Remove="Highlight\**"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <None Remove="Highlight\**"/>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Resources\Highlight\" />
+        <None Remove="Resources\Sprites\default.png"/>
+        <EmbeddedResource Include="Resources\Sprites\default.png"/>
+        <None Remove="Resources\Sprites\down.png"/>
+        <EmbeddedResource Include="Resources\Sprites\down.png"/>
+        <None Remove="Resources\Sprites\left.png"/>
+        <EmbeddedResource Include="Resources\Sprites\left.png"/>
+        <None Remove="Resources\Sprites\right.png"/>
+        <EmbeddedResource Include="Resources\Sprites\right.png"/>
+        <None Remove="Resources\Sprites\up.png"/>
+        <EmbeddedResource Include="Resources\Sprites\up.png"/>
     </ItemGroup>
 </Project>

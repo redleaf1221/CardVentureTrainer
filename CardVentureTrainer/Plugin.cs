@@ -3,6 +3,7 @@ using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
 using BepInEx.Unity.Mono;
+using CardVentureTrainer.Core;
 using CardVentureTrainer.Features;
 using CardVentureTrainer.UI;
 using HarmonyLib;
@@ -23,6 +24,8 @@ public class Plugin : BaseUnityPlugin {
         Config = base.Config;
 
         HarmonyInstance = new Harmony(MyPluginInfo.PLUGIN_GUID);
+
+        SpriteManager.InitSpriteManager();
 
         FeatureManager.InitFeatures();
 

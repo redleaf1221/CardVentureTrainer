@@ -1,21 +1,20 @@
-using System.Collections;
+using CardVentureTrainer.Core;
 using UnityEngine;
 
 namespace CardVentureTrainer.Features.Highlight;
 
 public class LatticeNodeHighlighter : MonoBehaviour {
     private SpriteRenderer _highlightRenderer;
-    private Coroutine _highlightTimerCoroutine;
     private LatticeNode _latticeNode;
 
     private void Awake() {
         var highlightObj = new GameObject("LatticeHighlight");
         highlightObj.transform.SetParent(transform);
         highlightObj.transform.localPosition = Vector3.zero;
-        highlightObj.transform.localScale = Vector3.one * 129f;
+        highlightObj.transform.localScale = Vector3.one;
 
         _highlightRenderer = highlightObj.AddComponent<SpriteRenderer>();
-        _highlightRenderer.sprite = CreateDefaultSprite();
+        _highlightRenderer.sprite = SpriteManager.GetSprite("default");
         _highlightRenderer.color = Color.clear;
         _highlightRenderer.sortingOrder = 1000;
         _highlightRenderer.sortingLayerName = "card";
@@ -27,11 +26,11 @@ public class LatticeNodeHighlighter : MonoBehaviour {
     }
 
     private void OnEnable() {
-        HideHighlight();
+        ResetHighlight();
     }
 
     private void OnDisable() {
-        HideHighlight();
+        ResetHighlight();
     }
 
 
@@ -42,37 +41,16 @@ public class LatticeNodeHighlighter : MonoBehaviour {
         }
     }
 
-    public void ShowHighlight(Color color, float duration = 0f) {
-        if (_highlightTimerCoroutine != null) {
-            StopCoroutine(_highlightTimerCoroutine);
-            _highlightTimerCoroutine = null;
-        }
-
+    public void SetColor(Color color) {
         _highlightRenderer.color = color;
-
-        if (duration > 0) {
-            _highlightTimerCoroutine = StartCoroutine(HighlightTimer(duration));
-        }
     }
 
-    public void HideHighlight() {
-        _highlightRenderer.color = Color.clear;
-        if (_highlightTimerCoroutine == null) return;
-        StopCoroutine(_highlightTimerCoroutine);
-        _highlightTimerCoroutine = null;
+    public void SetSprite(Sprite sprite) {
+        _highlightRenderer.sprite = sprite;
     }
 
-    private static Sprite CreateDefaultSprite() {
-        var texture = new Texture2D(1, 1);
-        texture.SetPixel(0, 0, Color.white);
-        texture.Apply();
-        return Sprite.Create(texture, new Rect(0, 0, 1, 1), new Vector2(0.5f, 0.5f));
-    }
-
-    private IEnumerator HighlightTimer(float duration) {
-        yield return new WaitForSeconds(duration);
-        if (_highlightTimerCoroutine == null) yield break;
-        HideHighlight();
-        _highlightTimerCoroutine = null;
+    public void ResetHighlight() {
+        SetColor(Color.clear);
+        SetSprite(SpriteManager.GetSprite("default"));
     }
 }
